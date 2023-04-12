@@ -4,4 +4,8 @@ from testapp.models import TestApp
 class MyPage(models.Model):
     class Meta:
         db_table="my_page"
-    testkey=models.ManyToManyField(TestApp,blank=True)
+    name = models.CharField(max_length=20)
+    mypage_test=models.ManyToManyField(TestApp,blank=True,related_name='testname')
+
+    def __str__(self):
+        return self.name
