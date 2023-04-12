@@ -3,14 +3,14 @@ from django.contrib.auth.decorators import login_required
 from .models import QnaModel
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
-
+from django.views.decorators.http import require_http_methods
 
 #====사용자 인증 여부에 따라 홈페이지 또는 문의 페이지로 이동하는 코드====
 def home(request):
     user = request.user.is_authenticated  
     # 사용자가 인증을 받았는지 (로그인이 되어있는지)
     if user:
-        return redirect('/qna')
+        return redirect('/qna_list')
     else:
         return redirect('/signin')
 
@@ -36,7 +36,7 @@ def qna_list_view(request):
 def qna_create_view(request):
     if request.method == 'GET': #GET메소드로 요청 들어 올 경우
         return render(request, 'qna/qna_create.html')
-    if request.method == 'POST':  # 요청 방식이 POST 일때
+    if request.method == 'POST':  # 요청 방식이 POST 일때 
         user = request.user  # 현재 로그인 한 사용자를 불러오기
         my_qna = QnaModel()  # 문의글 등록 모델 가져오기
         my_qna.author = user  # 모델에 사용자 저장
@@ -45,29 +45,29 @@ def qna_create_view(request):
         my_qna.title =  request.POST.get('title', '') 
         my_qna.content = request.POST.get('content', '') 
         my_qna.save()
-        return redirect('/qna') 
-        # if not all(my_product.__dict__.values()):
-        #     error_message = "입력값이 없습니다."
-        #     return render(request, 'product/product_create.html', {'error_message': error_message})
-        
-        
-        
-        
+        return redirect('/qna_list') 
+
+
 #=======문의글 상세페이지 view========
 @login_required
 def qna_detail_view(request, pk):
     post = get_object_or_404(QnaModel, pk=pk)
-    context = {
-        'post' : post, 
-    }
-    return render(request, 'qna/qna_detail.html', context)
-        
-
-@login_required
-def qna_edit_view(request, pk):
-    post = get_object_or_404(QnaModel, pk=pk)
+    if request.method == "GET":
+      context = {
+          'post' : post, 
+      }
+      return render(request, 'qna/qna_detail.html', context)
     if request.method == "POST":
-      post.title = request.POST['title']
-      post.content = request.POST['content']
+      post.title = request.POST['inputValue']
+      post.content = request.POST['inputcontent']
       post.save()
-      return redirect('/qna')
+      return redirect('/qna/detail/'+ str(post.pk) +'/')
+    
+    
+#========문의글 삭제 view===========
+def qna_delete_view(request, pk):
+  if request.method == "POST":
+    post = get_object_or_404(QnaModel, pk=pk)
+    post.delete()
+    return redirect('/qna_list')
+

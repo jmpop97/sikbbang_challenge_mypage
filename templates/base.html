@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %} | 식빵...챌..릱..</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script defer src="{% static 'base.js' %}"></script>
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div class="nav">
+    <a href="/" class="logo">로고를 넣어주세요.</a>
+    <div class="sign_box">
+      <a href="/sign-in" class="sign_in">로그인</a>
+      <a href="/sign-up" class="sign_up">회원가입</a>
+    </div>
+  </div>
+  {% block content %}
+  {% endblock %}
+  <h1>문의게시판</h1>
+
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li><a href="/qna/create">작성하기</a></li>
+      <li>마이페이지</li>
+    </ul>
+  </nav>
+
+  <table>
+    <thead>
+      <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if allqna %}
+      {% for qna in allqna %}
+      <tr>
+        <td><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.title }}</a></td>
+        <td>{{ qna.author }}</td>
+        <td>{{ qna.created_at|date:'Y. m. d' }}</td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td>작성된 게시글이 없습니다.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</body>
+</html>
