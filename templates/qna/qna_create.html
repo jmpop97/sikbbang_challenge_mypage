@@ -1,0 +1,11 @@
+<form method="post">
+  {% csrf_token %}
+  <label for="name">제목:</label>
+  <input type="text" required id="name" name="title"><br>
+
+  <label for="code">문의 내용:</label>
+  <input type="text" required id="code" name="content"><br>
+
+  <button type="submit" class="btn btn-primary">등록</button>
+
+</form>
