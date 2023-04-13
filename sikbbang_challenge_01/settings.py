@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mypage',
     'django_cleanup',
     'challenge',
+    'qna'
 ]
 
 MIDDLEWARE = [
