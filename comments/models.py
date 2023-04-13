@@ -10,7 +10,7 @@ class CommentModel(models.Model):
     comment_writer = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     comment_created_at = models.DateTimeField(auto_now_add=True)  # 이게 이미 날짜 찍는거
     comment_content = models.CharField(max_length=200)
-    comment_image = models.ImageField(upload_to='')
+    comment_image = models.ImageField(upload_to='images/')
 
 # username = models.CharField(max_length=20, null=False)
 # password = models.CharField(max_length=256, null=False)

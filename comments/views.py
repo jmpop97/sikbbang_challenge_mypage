@@ -6,8 +6,8 @@ from .models import CommentModel  # DH 필요한 데이터 모델들
 # Create your views here.
 
 def comment_read(request):  # comments DB 댓글들을 모두 불러와서 html에 표시하는 함수. 표시된 댓글들 중 나의 댓글에는 수정하기와 삭제하기 버튼이 보인다.
-    pass
-
+    all_comment = CommentModel.objects.all().order_by("-comment_created_at") #커멘트모델의 모든 오브젝트를 불러오는데 오더바이 안의 순서로 불러와라. 앞에 - 썼으니 역순이라 최신글 상단
+    return render(request, "comments/comment_read.html", {"all_comment": all_comment}) #렌더를 해오되, 왼쪽all_comment 오른쪽all_comment 값을 담아서 html에 보내주는 것.
 
 @login_required
 def comment_create(request):  # 작성하기 버튼 클릭 시 모든 인풋값을 받아서 comments DB에 저장하는 함수
@@ -20,10 +20,10 @@ def comment_create(request):  # 작성하기 버튼 클릭 시 모든 인풋값�
 
         # html에서 받은 각각 인풋값들을 DB에 넣기 위해 변수 선언
         my_comment.comment_content = request.POST.get('comment_content', '')  # 사용자가 입력한 댓글내용
-        my_comment.comment_image = request.POST.get('comment_image', '')  # 사용자가 업로드한 이미지파일
+        my_comment.comment_image = request.FILES.get('comment_image')  # 사용자가 업로드한 이미지파일
 
         my_comment.save()
-        return redirect('/api/comments')
+        return redirect('/api/comments/create')
 
 
 def comment_update(request):  # 나의 댓글에 보이는 수정하기 버튼 클릭 시,... 잠깐... 수정하기 버튼 누르면 새롭게 수정할 창이 떠야 하는데?
