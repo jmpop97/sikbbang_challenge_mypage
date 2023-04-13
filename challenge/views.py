@@ -21,3 +21,7 @@ def posting_challenge(request):
     challenge.save()
 
     return redirect('/challenge/posting')
+
+
+def challenge_detail(request):
+    pass
