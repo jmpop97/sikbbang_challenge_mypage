@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<a class="nav-link" href="/test"> 제품보기 </a>
+{% for form in forms %}
+    <form method="post" >
+        =================================
+    <!-- #3 -->
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit"> 데이터주기 </button>
+    <button type="button" onclick="location.href='/test' ">test로</button>
+    </form>
+{% endfor %}
 </body>
 </html>

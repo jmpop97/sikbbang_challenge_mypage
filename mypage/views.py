@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import MyPage
+from .forms import *
 from qna.models import QnaModel
 # Create your views here.
 def mychallenge(request):
@@ -15,3 +16,15 @@ def mychallengeadd(request):
     testkey1.qna_key.add('4')
     testkey1.qna_key.remove('5')
     return render(request,'mypage/mypage.html')
+
+def mychallengeform(request):
+    form1=MyPageForm1()
+    # if request.method == "POST":
+    #     form=MyPageForm2(request.POST)
+    #     form.save()
+    #     print(form)
+    form2 = MyPageForm2()
+    form3 = MyPageForm3()
+    forms=[form1,form2,form3]
+    print(forms)
+    return render(request,'mypage/mypage.html',{'forms': forms})
