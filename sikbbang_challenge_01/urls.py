@@ -20,7 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
-    path('', include('qna.urls'))
+    path('', include('qna.urls')),
     path('',include('mypage.urls')),
     path('/api/challenge/', include('challenge.urls')),
 ]
