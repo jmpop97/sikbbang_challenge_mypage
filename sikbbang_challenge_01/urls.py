@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
     path('', include('qna.urls')),
-    path('',include('mypage.urls')),
-    path('/api/challenge/', include('challenge.urls')),
+    path('', include('mypage.urls')),
+    path('', include('challenge.urls')),
 ]
