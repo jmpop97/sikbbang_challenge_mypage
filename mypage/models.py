@@ -1,11 +1,11 @@
 from django.db import models
-from testapp.models import TestApp
+from qna.models import QnaModel
 # Create your models here.
 class MyPage(models.Model):
     class Meta:
         db_table="my_page"
     name = models.CharField(max_length=20)
-    mypage_test=models.ManyToManyField(TestApp,blank=True,related_name='testname')
+    qna_key=models.ManyToManyField(QnaModel,blank=True,related_name='mypage_key')
 
     def __str__(self):
         return self.name
