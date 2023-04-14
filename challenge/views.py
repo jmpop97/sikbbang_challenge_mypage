@@ -33,8 +33,8 @@ def posting_challenge(request):
             challenge = ChallengeModel(challenge_author=challenge_author, challenge_title=challenge_title, challenge_name=challenge_name,
                                        challenge_genre=challenge_genre, challenge_content=challenge_content, challenge_image=challenge_image)
             challenge.save()
-
-            return redirect('/challenge/posting')
+            challenge_id = challenge.id
+            return redirect('/challenge/' + str(challenge_id))
 
         else:
             pass
@@ -48,3 +48,9 @@ def challenge_detail(request, id):
             'challenge': target_challenge
         }
         return render(request, 'challenge/detail.html', context)
+
+
+def delete_challenge(request, id):
+    target_challenge = ChallengeModel.objects.get(id=id)
+    target_challenge.delete()
+    return redirect('/main')
