@@ -34,7 +34,6 @@ def signup(request):
                     UserModel.objects.create_user(username=username, password=password,email=email)
                     # mypage추가
                     create_id=UserModel.objects.get(username=username)
-                    print(create_id)
                     mypage=MyPageModel(user_key=create_id)
                     mypage.save()
                     return redirect('/signin') # 회원가입이 완료되었으므로 로그인 페이지로 이동
