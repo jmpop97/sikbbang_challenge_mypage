@@ -1,47 +1,51 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %} | 챌린지</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block static %}
-  <link rel="stylesheet" href="{% static 'comment_style.css' %}">
-  <link rel="stylesheet" href="{% static 'comment_create_style.css' %}">
-  <link rel="stylesheet" href="{% static 'comment_update_style.css' %}">
-  <link rel="stylesheet" href="{% static 'base.css' %}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script defer src="{% static 'base.js' %}"></script>
-  {% endblock %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | 챌린지</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'comment_style.css' %}">
+    <link rel="stylesheet" href="{% static 'comment_create_style.css' %}">
+    <link rel="stylesheet" href="{% static 'comment_update_style.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <script defer src="{% static 'base.js' %}"></script>
+    {% endblock %}
 </head>
+
 <body>
-  <!-- 상단바입니다 -->
-  <div class="nav">
-    <a href="/" class="logo">sikbbang_challenge</a>
-    <div class="menu_box">
-      {% if not user.is_authenticated %}
-      <div class="sign_box">
-        <a href="/signin" class="sign_in">로그인</a>
-        <span>|</span>
-        <a href="/signup" class="sign_up">회원가입</a>
-      </div>
-      {% else %}
-      <div class="sign_box">
-        <i class="xi-bars"></i>
-      </div>
-      {% endif %}
+    <!-- 상단바입니다 -->
+    <div class="nav">
+        <a href="/" class="logo">sikbbang_challenge</a>
+        <div class="menu_box">
+            {% if not user.is_authenticated %}
+            <div class="sign_box">
+                <a href="/signin" class="sign_in">로그인</a>
+                <span>|</span>
+                <a href="/signup" class="sign_up">회원가입</a>
+            </div>
+            {% else %}
+            <div class="sign_box">
+                <i class="xi-bars"></i>
+            </div>
+            {% endif %}
+        </div>
     </div>
-  </div>
-  <!-- 사이드 바 입니다 -->
-  <div class="slide_nav">
-    <a href="#">HOME</a>
-    <a href="/qna_list/">문의게시판</a>
-    <a href="#">마이페이지</a>
-    <a href="/logout">로그아웃</a>
-  </div>
-  {% block content %}
-  {% endblock %}
+
+    <!-- 사이드 바 입니다 -->
+    <div class="slide_nav">
+        <a href="#">HOME</a>
+        <a href="/qna_list/">문의게시판</a>
+        <a href="/mypage">마이페이지</a>
+        <a href="/logout">로그아웃</a>
+    </div>
+
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

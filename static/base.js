@@ -1,5 +1,8 @@
+// $(".qna_edit").hide()
 $(".slide_nav").hide()
+
 var isNavVisible = false;
+
 $(".xi-bars").click(function () {
   if (isNavVisible) {
     $(".slide_nav").fadeOut(500)
@@ -8,4 +11,5 @@ $(".xi-bars").click(function () {
   }
   isNavVisible = !isNavVisible;
 });
+
 document.getElementById(".xi-bars")

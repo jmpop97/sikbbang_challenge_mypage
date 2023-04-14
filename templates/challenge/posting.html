@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<form class="form-group" action="{% url 'challenge:posting_challenge' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="challenge_title">제목</label>
+    <input class="form-control" type="text" name="challenge_title" /><br />
+    <label for="challenge_name">챌린지 이름</label>
+    <input class="form-control" type="text" name="challenge_name" /><br />
+    <label for="challenge_genre">도전 장르</label>
+    <input class="form-control" type="text" name="challenge_genre" /><br />
+    <label for="challenge_content">내용</label>
+    <textarea class="form-control" name="challenge_content" cols="30" rows="5"></textarea><br />
+    <label for="challenge_image">이미지 업로드</label>
+    <input type="file" class="form-control-file" id="challenge_image" name="challenge_image"><br />
+    <input type="submit" value="작성" />
+</form>
+<a href="{% url 'challenge:view_main' %}">취소</a>
+{% endblock %}

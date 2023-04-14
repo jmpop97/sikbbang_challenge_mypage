@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<nav>
+  <ul class="qna_create">
+    <li><a href="/qna/create">작성하기</a></li>
+  </ul>
+</nav>
+<br>
+
+
+
+Q&A
+<div class="main_middle">
+  <ul class="cont_txt">
+    <li class="row1">
+      <p>제목</p>
+    </li>
+    <li class="row3">
+      <p>작성자</p>
+    </li>
+    <li class="row5">
+      <p>작성일</p>
+    </li>
+  </ul>
+  {% if list %}
+  {% for qna in list %}
+  <section class="cont_box">
+    <ul class="cont_ul">
+      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.qna_title }}</a></li>
+      <li class="row4">{{ qna.client }}</li>
+      <li class="row6">{{ qna.qna_created_at|date:'Y. m. d' }}</li>
+    </ul>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <span>작성된 게시글이 없습니다.</span>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'qna',
+    'user',
+    'mypage',
     'django_cleanup',
-
-    'users',
+    'challenge',
     'comments',
 ]
 
@@ -107,9 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -120,17 +123,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
-STATICFILES_DIRS=[BASE_DIR / 'static']
+
+# STATICFILES_DIRS=[BASE_DIR / 'static']
+# 회의 이제 동현꺼는 os 임포트가 필요할거같애. 그래도 os.path로 가자
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.UserModel'
 
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')랑 같음. Python 3.4이상 버전에서만 가능. 3.4버전 미만은 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')를 사용해야함
+AUTH_USER_MODEL = 'user.UserModel'
+
 MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')랑 같음. Python 3.4이상 버전에서만 가능. 3.4버전 미만은 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')를 사용해야함
+
 MEDIA_URL = '/media/'
