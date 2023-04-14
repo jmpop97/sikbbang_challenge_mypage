@@ -55,6 +55,7 @@ def challenge_detail(request, id):
         return render(request, 'challenge/detail.html', context)
 
 
+
 # title = 제목 (키, 밸류)
 # =========챌린지 검색 view ============
 def challenge_search_view(request):
@@ -62,3 +63,19 @@ def challenge_search_view(request):
     results = ChallengeModel.objects.filter(challenge_title__icontains=query)
     context = {'query': query, 'results': results}
     return render(request, 'challenge/challenge_search.html', context)
+
+@login_required
+def delete_challenge(request, id):
+    target_challenge = ChallengeModel.objects.get(id=id)
+    target_challenge.delete()
+    return redirect('/main')
+
+
+@login_required
+def edit_challenge(request, id):
+    target_challenge = ChallengeModel.objects.get(id=id)
+    if request.method == 'GET':
+        context = {
+            'challenge': target_challenge
+        }
+        return render(request, 'challenge/detail_edit.html', context)
