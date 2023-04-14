@@ -33,7 +33,7 @@ def posting_challenge(request):
             challenge = ChallengeModel(challenge_author=challenge_author, challenge_title=challenge_title, challenge_name=challenge_name,
                                        challenge_genre=challenge_genre, challenge_content=challenge_content, challenge_image=challenge_image)
             challenge.save()
-
+            challenge.mypage_key.add(request.user.id)
             return redirect('/challenge/posting')
 
         else:
