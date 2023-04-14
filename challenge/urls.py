@@ -13,6 +13,7 @@ urlpatterns = [
     path('challenge/<int:id>', views.challenge_detail, name='challenge_detail'),
     path('challenge/<int:id>/delete',
          views.delete_challenge, name='delete_challenge'),
+    path('search_results/', views.challenge_search_view, name='search-results'),
     path('challenge/<int:id>/edit',
          views.edit_challenge, name='edit_challenge'),
 ]

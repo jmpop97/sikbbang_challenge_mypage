@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if results %}
+<ul>
+  {% for result in results %}
+  <li>{{ result.challenge_title }}</li>
+  <li>작성자 : {{ result.challenge_author }}</li>
+  <li>챌린지명 : {{ result.challenge_name }}</li>
+  <img src="{{ MEDIA_URL }}{{ result.challenge_image.url }}" alt="{{ result.challenge_title }}">
+  {% endfor %}
+</ul>
+{% else %}
+<p>결과가 없습니다</p>
+{% endif %}
+
+{% endblock %}
