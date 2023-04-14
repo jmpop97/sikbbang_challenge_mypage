@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('qna.urls')),
     path('', include('mypage.urls')),
     path('', include('challenge.urls')),
+    path('', include('comments.urls')),
 ]
 
 if settings.DEBUG:

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mypage',
     'django_cleanup',
     'challenge',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
+# STATICFILES_DIRS=[BASE_DIR / 'static']
+# 회의 이제 동현꺼는 os 임포트가 필요할거같애. 그래도 os.path로 가자
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 
@@ -129,6 +135,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 AUTH_USER_MODEL = 'user.UserModel'
