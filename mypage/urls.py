@@ -5,5 +5,5 @@ urlpatterns = [
     path('test1/', views.mychallenge, name='a'),
     path('test2/', views.mychallengeadd, name='b'),
     path('test/', views.mychallengeform, name='c'),
-    path('mypage/',views.mypage_list,name='mypage-list')
+    path('mypage/', views.mypage_list,name='mypage-list')
 ]
