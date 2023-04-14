@@ -1,9 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>메인페이지(임시)</h1>
+<a href="{% url 'challenge:view_posting_challenge' %}">챌린지 작성하기</a>
 <hr>
 {% for challenge in challenges %}
-<p>제목 : {{ challenge.challenge_title }}</p>
+<a href="{% url 'challenge:challenge_detail' challenge.id %}">제목 : {{ challenge.challenge_title }}</a>
 <p>작성자 : {{ challenge.challenge_author }}</p>
 <hr>
 {% endfor %}{% endblock %}

@@ -6,8 +6,6 @@
 <p>챌린지 이름 : {{ challenge.challenge_name }}</p>
 <p>도전 장르 : {{ challenge.challenge_genre }}</p>
 <p>내용 : {{ challenge.challenge_content }}</p>
-<img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}"><br>
-<a href="{% url 'challenge:delete_challenge' challenge.id %}">삭제</a>
-<a href="{% url 'challenge:view_main' %}">목록</a>
+<img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}">
 
 {% endblock %}

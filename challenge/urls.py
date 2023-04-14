@@ -6,10 +6,12 @@ from django.conf.urls.static import static
 app_name = 'challenge'
 
 urlpatterns = [
-    path('main/', views.view_main, name='challenge_detail'),
+    path('main/', views.view_main, name='view_main'),
     path('challenge/posting/', views.view_posting_challenge,
          name='view_posting_challenge'),
     path('api/challenge/', views.posting_challenge, name='posting_challenge'),
     path('challenge/<int:id>', views.challenge_detail, name='challenge_detail'),
+    path('challenge/<int:id>/delete',
+         views.delete_challenge, name='delete_challenge'),
 
 ]
