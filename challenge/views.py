@@ -11,6 +11,7 @@ def view_posting_challenge(request):
 
 
 def posting_challenge(request):
+
     if request.method == 'POST':
         challenge_title = request.POST.get('challenge_title')
         challenge_name = request.POST.get('challenge_name')
