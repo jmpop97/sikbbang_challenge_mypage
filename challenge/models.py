@@ -3,10 +3,11 @@ from django.db import models
 # Create your models here.
 
 
-class Challenge(models.Model):
+class ChallengeModel(models.Model):
     class Meta:
         db_table = "challenges"
 
+    # challenge_writer = ''
     chellenge_title = models.CharField(max_length=50)
     challenge_name = models.CharField(max_length=50)
     challenge_genre = models.CharField(max_length=50)
