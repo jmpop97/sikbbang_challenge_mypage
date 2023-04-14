@@ -29,15 +29,34 @@
   {% for qna in allqna %}
   <section class="cont_box">
     <ul class="cont_ul">
-      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.title }}</a></li>
-      <li class="row4">{{ qna.author }}</li>
-      <li class="row6">{{ qna.created_at|date:'Y. m. d' }}</li>
+      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.qna_title }}</a></li>
+      <li class="row4">{{ qna.client }}</li>
+      <li class="row6">{{ qna.qna_created_at|date:'Y. m. d' }}</li>
     </ul>
     <hr>
-    {% endfor %}
-    {% else %}
-    <span>작성된 게시글이 없습니다.</span>
-    {% endif %}
   </section>
+  {% endfor %}
+  {% else %}
+  <span>작성된 게시글이 없습니다.</span>
+  {% endif %}
+
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if allqna.has_previous %}
+      <a href="?page=1">&laquo; 처음</a>
+      <a href="?page={{ allqna.previous_page_number }}">이전</a>
+      {% endif %}
+
+      <span class="current-page">
+        페이지 {{ allqna.number }} / {{ allqna.paginator.num_pages }}
+      </span>
+
+      {% if allqna.has_next %}
+      <a href="?page={{ allqna.next_page_number }}">다음</a>
+      <a href="?page={{ allqna.paginator.num_pages }}">끝 &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
 </div>
 {% endblock %}

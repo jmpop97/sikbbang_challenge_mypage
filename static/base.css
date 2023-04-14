@@ -16,7 +16,7 @@ body {
 .nav {
   width: 100%;
   height: 130px;
-  background-color: #8d8da0;
+  background-color: rgb(67, 128, 90);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@ body {
   right: 0px;
   width: 300px;
   height: 100%;
-  background-color: #b2b8d8;
+  background-color: #78997d;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -61,7 +61,7 @@ body {
 }
 
 .qna_create {
-  background-color: rgb(173, 173, 173);
+  background-color: rgb(193, 214, 193);
   display: inline-block;
   padding: 5px;
   margin-top: 20px;
@@ -73,42 +73,30 @@ body {
 }
 
 
-.qna_table {
-  margin: auto;
-  border-collapse: separate;
-  border-spacing: 300px 30px;
-}
-
-.qna_table thead {
-  background-color: rgb(178, 149, 182);
-}
-
 .qna_list_title {
   font-weight: bold;
 }
 
 .qna_create_box {
-  background-color: #b2b8d8;
+  background-color: rgb(236, 232, 232);
   padding: 100px;
-
-}
-
-.qna_detail_box {
-  width: 900px;
-  height: 600px;
+  width: 30%;
+  height: 30%;
+  margin-left: 35%;
+  margin-top: 50px;
 }
 
 .qna_detail_box_cover {
   margin-top: 150px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: rgb(236, 232, 232);
+  margin-left: 40%;
+  width: 400px;
+  height: 500px;
 }
 
-.qna_create_box_cover {
-  margin-top: 150px;
-  display: flex;
-  justify-content: center;
-}
 
 .qna_content_box {
   padding: 0px;
@@ -148,14 +136,14 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding: 5px;
   background-color: rgba(240, 240, 240, 1);
 }
 
 .cont_box {
   width: 100%;
-  height: 100%;
-
+  height: 150px;
 }
 
 .cont_ul {
@@ -165,7 +153,17 @@ body {
   margin: 10px 0 10px 10px;
 }
 
-textarea {
+.cont_ul>* {
+  flex-basis: 200px;
+}
+
+.qna_update_box textarea {
+  resize: none;
+  height: 200px;
+  width: 400px;
+}
+
+.qna_create_box_cover textarea {
   resize: none;
   height: 200px;
   width: 400px;
@@ -179,33 +177,27 @@ hr {
   font-weight: bold;
 }
 
-.qna_detail_box p {
-  padding-top: 20px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-}
-
-.go_to_edit_btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.qna_detail_box {
+  margin-top: 20%;
 }
 
 .qna_update_box {
-  display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
   margin-top: 100px;
-  background-color: green;
+  margin-left: 40%;
+  background-color: rgb(236, 232, 232);
+  padding: 50px;
 }
 
 .update_btn1 {
-  background-color: purple;
+  background-color: rgb(221, 221, 221);
+  font-weight: bold;
   border: none;
   margin-top: 10px;
+  padding: 5px;
 }
 
 
@@ -213,7 +205,42 @@ hr {
   display: inline-block;
   justify-content: center;
   align-items: center;
-  margin-left: 30%;
-  background-color: purple;
+  margin-left: 10px;
+  background-color: rgb(221, 221, 221);
+  font-weight: bold;
   margin-top: 10px;
+  padding: 5px;
+  font-size: small;
+}
+
+.go_to_edit_btn {
+  background-color: rgb(221, 221, 221);
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 43%;
+}
+
+
+.step-links {
+  padding-bottom: 30px;
+}
+
+.cont_box li {
+  text-align: center;
+}
+
+.detail1 {
+  margin-bottom: 10px;
+}
+
+
+.detail3 {
+  margin-bottom: 10px;
+}
+
+.detail4 {
+  margin-top: 5px;
+  background-color: white;
+  width: 300px;
+  height: 250px;
 }
