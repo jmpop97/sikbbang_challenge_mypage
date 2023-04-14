@@ -12,26 +12,27 @@ def home(request):
     user = request.user.is_authenticated
     # 사용자가 인증을 받았는지 (로그인이 되어있는지)
     if user:
-        return redirect('/qna_list')
+        return redirect('/main')
     else:
         return redirect('/signin')
 
 
 def qna_list_view(request):
     if request.method == 'GET':  # GET메소드로 요청 들어 올 경우
-        all_qna = QnaModel.objects.all().order_by('-qna_created_at')  # 등록 역순으로 불러오기
+        all_qna = QnaModel.objects.all().order_by(
+            '-qna_created_at')  # QnaModel의 모든 객체 등록 역순으로 불러오기
 
-        # 페이지네이션 객체 생성
-        paginator = Paginator(all_qna, 10)  # 페이지당 10개씩
-        # GET요청에서 'poge'파라미터 가져오기
+        # 'Paginator'클래스를 이용하여 페이지네이션 객체 생성
+        paginator = Paginator(all_qna, 10)  # all_qna에 저장된 객체들을 10개씩 나눔
+        # GET 파라미터로 'page'가 전달됨
         page = request.GET.get('page')
 
-        try:
+        try:  # 현재 보여줄 페이지에 해당하는 QnaModel 객체들을 가져와 qna_list에 저장
             qna_list = paginator.page(page)
-        except PageNotAnInteger:
-            qna_list = paginator.page(1)
-        except EmptyPage:
-            qna_list = paginator.page(paginator.num_pages)
+        except PageNotAnInteger:  # 'page'값이 없는 경우 'PageNotAnInteger' 예외 발생
+            qna_list = paginator.page(1)  # 1페이지 보여주기
+        except EmptyPage:  # 'page'값에 임의의 값을 입력하여 요청하였을 때, 현재 페이지 범위를 초과하는 경우
+            qna_list = paginator.page(paginator.num_pages)  # 마지막 페이지 보여주기
 
         return render(request, 'qna/qna_list.html', {'allqna': qna_list})
 
@@ -67,6 +68,7 @@ def qna_detail_view(request, pk):
     return render(request, 'qna/qna_detail.html', context)
 
 
+# =========문의글 수정 view=============
 @login_required
 def qna_edit_view(request, pk):
     post = get_object_or_404(QnaModel, pk=pk)

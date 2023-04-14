@@ -43,16 +43,16 @@
 
   <div class="pagination">
     <span class="step-links">
-      {% if allqna.has_previous %}
+      {% if allqna.has_previous %} <!--allqna객체가 이전 페이지를 가진 경우-->
       <a href="?page=1">&laquo; 처음</a>
       <a href="?page={{ allqna.previous_page_number }}">이전</a>
       {% endif %}
 
       <span class="current-page">
         페이지 {{ allqna.number }} / {{ allqna.paginator.num_pages }}
-      </span>
+      </span> <!--현재페이지 번호 / 전체 페이지 수 출력-->
 
-      {% if allqna.has_next %}
+      {% if allqna.has_next %} <!--allqna객체가 다음페이지 가진 경우-->
       <a href="?page={{ allqna.next_page_number }}">다음</a>
       <a href="?page={{ allqna.paginator.num_pages }}">끝 &raquo;</a>
       {% endif %}
