@@ -8,7 +8,8 @@ class ChallengeModel(models.Model):
     class Meta:
         db_table = "challenges"
 
-    challenge_author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    challenge_author = models.ForeignKey(
+        UserModel, on_delete=models.SET_NULL, null=True)
     challenge_title = models.CharField(max_length=50)
     challenge_name = models.CharField(max_length=50)
     challenge_genre = models.CharField(max_length=50)
