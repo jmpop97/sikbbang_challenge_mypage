@@ -8,7 +8,7 @@ class Challenge(models.Model):
         db_table = "challenges"
 
     # challenge_writer = ''
-    chellenge_title = models.CharField(max_length=50)
+    challenge_title = models.CharField(max_length=50)
     challenge_name = models.CharField(max_length=50)
     challenge_genre = models.CharField(max_length=50)
     challenge_content = models.TextField()
