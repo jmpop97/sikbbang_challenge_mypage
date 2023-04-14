@@ -21,6 +21,7 @@ def view_posting_challenge(request):
 
 @login_required
 def posting_challenge(request):
+
     if request.method == 'POST':
         challenge_author = request.user  # 현재 로그인한 유저
         challenge_title = request.POST.get('challenge_title')

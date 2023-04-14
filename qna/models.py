@@ -1,11 +1,11 @@
 from django.db import models
-# from user.models import UserModel
+from user.models import UserModel
 
 
 class QnaModel(models.Model):
     class Meta:
         db_table = "Qna_register"
-    # author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     content = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -13,4 +13,3 @@ class QnaModel(models.Model):
 
     def __str__(self):
         return self.title
-
