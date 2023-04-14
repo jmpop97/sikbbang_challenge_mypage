@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="wrap_all">
+<h1 class="title">인증 후기를 남겨볼까요?</h1>
+<a class="new_comment_link" href="/api/comments/create">새로운 후기 작성</a>
+    {% if all_comment %}
+        {% for comment in all_comment %}
+            <div class="one_comment">
+                <p class="writer_date">
+                    <span>닉네임: {{ comment.comment_writer }}</span>
+                    <span>작성일: {{ comment.comment_created_at }}</span>
+                </p>
+                <div class="wrap_img_content">
+                    <div class="img_container">
+                        {% if comment.comment_image %}
+                            <img src="{{ comment.comment_image.url }}" alt="comment_image">
+                        {% else %}
+                            <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image">
+                        {% endif %}
+                    </div>
+                    <span class="comment_content">{{ comment.comment_content }}</span>
+                </div>
+                {% if comment.comment_writer == user %}
+                    <div class="edit_delete">
+                        <a class="edit_button" type="button" href="{% url 'comments:comment_update' comment.pk %}">수정하기</a>
+                        <form method="post" action="{% url 'comments:comment_delete' comment.pk %}">
+                            {% csrf_token %}
+                            <button class="delete_button" type="submit">삭제하기</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -10,12 +10,13 @@
     {% block static %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'comment_style.css' %}">
+    <link rel="stylesheet" href="{% static 'comment_create_style.css' %}">
+    <link rel="stylesheet" href="{% static 'comment_update_style.css' %}">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <script defer src="{% static 'base.js' %}"></script>
     {% endblock %}
 </head>
-
-
 
 <body>
     <!-- 상단바입니다 -->
@@ -36,7 +37,6 @@
         </div>
     </div>
 
-
     <!-- 사이드 바 입니다 -->
     <div class="slide_nav">
         <a href="#">HOME</a>
@@ -48,5 +48,4 @@
     {% block content %}
     {% endblock %}
 </body>
-
 </html>
