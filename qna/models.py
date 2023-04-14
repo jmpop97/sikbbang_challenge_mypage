@@ -1,5 +1,5 @@
 from django.db import models
-#from user.models import UserModel
+# from user.models import UserModel
 
 
 class QnaModel(models.Model):
@@ -10,7 +10,6 @@ class QnaModel(models.Model):
     content = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
 
     def __str__(self):
         return self.name
