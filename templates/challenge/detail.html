@@ -1,5 +1,10 @@
-{% extends '../base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 
 
+<p>제목 : {{ challenge.challenge_title }}</p>
+<p>챌린지 이름 : {{ challenge.challenge_name }}</p>
+<p>도전 장르 : {{ challenge.challenge_genre }}</p>
+<p>내용 : {{ challenge.challenge_content }}</p>
+<img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}">
 
 {% endblock %}
