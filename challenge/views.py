@@ -51,7 +51,18 @@ def challenge_detail(request, id):
         return render(request, 'challenge/detail.html', context)
 
 
+@login_required
 def delete_challenge(request, id):
     target_challenge = ChallengeModel.objects.get(id=id)
     target_challenge.delete()
     return redirect('/main')
+
+
+@login_required
+def edit_challenge(request, id):
+    target_challenge = ChallengeModel.objects.get(id=id)
+    if request.method == 'GET':
+        context = {
+            'challenge': target_challenge
+        }
+        return render(request, 'challenge/detail_edit.html', context)
