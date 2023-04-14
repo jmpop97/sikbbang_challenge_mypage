@@ -45,6 +45,8 @@ def qna_create_view(request):
         my_qna.title =  request.POST.get('title', '') 
         my_qna.content = request.POST.get('content', '') 
         my_qna.save()
+        #mypage추가
+        my_qna.mypage_key.add(request.user.id)
         return redirect('/qna_list') 
 
 

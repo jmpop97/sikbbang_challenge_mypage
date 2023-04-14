@@ -1,17 +1,17 @@
 from django.shortcuts import render
-from .models import MyPage
+from .models import MyPageModel
 from .forms import *
 from qna.models import QnaModel
 # Create your views here.
 def mychallenge(request):
-    testkey1=MyPage.objects.get(id='5')
+    testkey1=MyPageModel.objects.get(id='5')
     print(testkey1.qna_key.all())
     test_app_key=QnaModel.objects.get(id='1')
     print(test_app_key.mypage_key.all())
     return render(request,'mypage/mypage.html')
 
 def mychallengeadd(request):
-    testkey1 = MyPage.objects.get(id='5')
+    testkey1 = MyPageModel.objects.get(id='5')
     test_app_key=QnaModel.objects.get(id='5')
     testkey1.qna_key.add('4')
     testkey1.qna_key.remove('5')
@@ -28,3 +28,14 @@ def mychallengeform(request):
     forms=[form1,form2,form3]
     print(forms)
     return render(request,'mypage/mypage.html',{'forms': forms})
+
+
+def qna_list(request):
+    qna_info=[]
+    print(request.user.id)
+    qna_key=MyPageModel.objects.get(id=request.user.id)
+    qna_info=qna_key.qna_key.all()
+    return qna_info
+def mypage_list(request):
+    list=qna_list(request)
+    return render(request, 'mypage/mypage_list.html',{'list':list})
