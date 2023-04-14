@@ -66,3 +66,15 @@ def edit_challenge(request, id):
             'challenge': target_challenge
         }
         return render(request, 'challenge/detail_edit.html', context)
+
+    elif request.method == 'POST':
+        target_challenge.challenge_title = request.POST.get('challenge_title')
+        target_challenge.challenge_name = request.POST.get('challenge_name')
+        target_challenge.challenge_genre = request.POST.get('challenge_genre')
+        target_challenge.challenge_content = request.POST.get(
+            'challenge_content')
+        target_challenge.challenge_image = request.FILES.get('challenge_image')
+        if target_challenge.challenge_title and target_challenge.challenge_name and target_challenge.challenge_genre and target_challenge.challenge_content:
+            target_challenge.save()
+            challenge_id = target_challenge.id
+            return redirect('/challenge/' + str(challenge_id))
