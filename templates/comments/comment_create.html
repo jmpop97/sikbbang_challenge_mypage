@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% block content %}
 
-<body>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <h1>댓글 작성하기 화면</h1>
-    <label for="comment_content">댓글 내용:</label>
-    <br>
-    <textarea id="comment_content" required name="comment_content"></textarea>
-    <br>
-    <label for="comment_image">이미지 파일 추가</label> <!-- 자세한 코드는 DB 가용성 보고 수정 -->
-    <br>
-    <input type="file" id="comment_image" name="comment_image" onchange="setThumbnail(event);">
-{#    <input type="file" id="post_img" name="post_img" onchange="setThumbnail(event);">#}
-    <br>
-    <br>
-    <!-- <input type="submit" value="등록하기"> -->
-    <button type="submit">등록</button>
+    <div class="wrap_all">
+        <h1 class="title">댓글을 작성해 보아요!</h1>
+        <div class="comment_box">
+            <span class="commentspan"><label for="comment_content">댓글 내용:</label></span>
+            <span><textarea class="textarea" id="comment_content" required name="comment_content"></textarea></span>
+        </div>
+        <div class="img_box">
+            <label class="imglabel" for="comment_image">이미지 파일 추가하기:</label> <!-- 자세한 코드는 DB 가용성 보고 수정 -->
+            <input class="imginput" type="file" id="comment_image" name="comment_image" onchange="setThumbnail(event);">
+            <!-- <input type="submit" value="등록하기"> -->
+        </div>
+        <button class="submitbtn" type="submit">등록</button>
+    </div>
 </form>
-</body>
 
-</html>
+{% endblock %}
