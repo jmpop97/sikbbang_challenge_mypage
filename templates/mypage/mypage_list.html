@@ -29,9 +29,9 @@ Q&A
   {% for qna in list %}
   <section class="cont_box">
     <ul class="cont_ul">
-      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.title }}</a></li>
-      <li class="row4">{{ qna.author }}</li>
-      <li class="row6">{{ qna.created_at|date:'Y. m. d' }}</li>
+      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.qna_title }}</a></li>
+      <li class="row4">{{ qna.client }}</li>
+      <li class="row6">{{ qna.qna_created_at|date:'Y. m. d' }}</li>
     </ul>
     <hr>
     {% endfor %}
