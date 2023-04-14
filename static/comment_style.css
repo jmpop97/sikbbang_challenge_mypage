@@ -1,0 +1,94 @@
+/*모든 내용물을 감싸는 div*/
+.wrap_all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+}
+
+/*타이틀: 인증 후기를 남겨볼까요?*/
+.title {
+    margin-top: 100px;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+/*새로운 후기 작성 버튼*/
+.new_comment_link {
+    margin: 60px 80px 60px 80px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 5px solid darkgreen;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+/*댓글 한 개 카드*/
+.one_comment {
+    background-color: antiquewhite;
+    width: 800px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 5px solid darkgreen;
+}
+
+/*작성자와 작성일 담은 p태그*/
+.writer_date {
+    padding: 10px 20px 20px 20px;
+    font-size: 20px;
+    color: darkgreen;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*댓글 이미지와 댓글 내용을 감싸주는 div*/
+.wrap_img_content {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+/*이미지 담는 투명 컨테이너와 이미지*/
+.img_container {
+  width: 300px;
+  height: 300px;
+  margin-right: 40px;
+  border-radius: 20px;
+}
+.img_container img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/*댓글내용 span*/
+.comment_content {
+    font-size: 18px;
+    font-weight: bold;
+    word-break: break-all;
+}
+
+/*수정버튼과 삭제버튼을 감싸는 div*/
+.edit_delete {
+    display: flex;
+    justify-content: end;
+}
+/*수정버튼*/
+.edit_button {
+    margin-right: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 7px;
+}
+/*삭제버튼*/
+.delete_button {
+    margin-right: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    color: red;
+    padding: 5px;
+}

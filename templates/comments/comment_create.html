@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="wrap_all">
+        <h1 class="title">댓글을 작성해 보아요!</h1>
+        <div class="comment_box">
+            <span class="commentspan"><label for="comment_content">댓글 내용:</label></span>
+            <span><textarea class="textarea" id="comment_content" required name="comment_content"></textarea></span>
+        </div>
+        <div class="img_box">
+            <label class="imglabel" for="comment_image">이미지 파일 추가하기:</label> <!-- 자세한 코드는 DB 가용성 보고 수정 -->
+            <input class="imginput" type="file" id="comment_image" name="comment_image" onchange="setThumbnail(event);">
+            <!-- <input type="submit" value="등록하기"> -->
+        </div>
+        <button class="submitbtn" type="submit">등록</button>
+    </div>
+</form>
+
+{% endblock %}

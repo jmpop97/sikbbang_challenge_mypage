@@ -1,0 +1,30 @@
+{#업데이트 에치티엠엘#}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="wrap_all">
+        <h1 class="title">수정하기!</h1>
+        <div class="comment_box">
+            <div class="writeranddate">
+                <div class="writer">{{ post_del.comment_writer }}</div>
+                <div>{{ post_del.comment_created_at }}</div>
+            </div>
+            <span>
+                <span class="commentspan"><label for="comment_content">댓글 내용:</label></span>
+                <span><textarea class="commenttextarea" id="comment_content" name="inputValue">{{ post_del.comment_content }}</textarea></span>
+            </span>
+        </div>
+        <div class="img_box">
+            <label class="imglabel" for="comment_image">이미지 파일 추가</label> <!-- 자세한 코드는 DB 가용성 보고 수정 -->
+            <input class="imginput" type="file" id="comment_image" name="input_image" onchange="setThumbnail();">
+        </div>
+        <!-- <input type="submit" value="등록하기"> -->
+        <button class="submitbtn" type="submit">등록</button>
+    </div>
+</form>
+
+{% endblock %}

@@ -6,12 +6,25 @@
   text-decoration: none;
   color: black;
 }
-
+/*회의시작*/
 html,
+body {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*==================================*/
+/*html,
 body {
   width: 100%;
   height: 100%;
 }
+*/
+/*회의 끝*/
 
 .nav {
   width: 100%;
