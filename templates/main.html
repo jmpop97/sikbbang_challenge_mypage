@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>메인페이지(임시)</h1>
+<hr>
+{% for challenge in challenges %}
+<p>제목 : {{ challenge.challenge_title }}</p>
+<p>작성자 : {{ challenge.challenge_author }}</p>
+<hr>
+{% endfor %}{% endblock %}
