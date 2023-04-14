@@ -28,3 +28,14 @@ def mychallengeform(request):
     forms=[form1,form2,form3]
     print(forms)
     return render(request,'mypage/mypage.html',{'forms': forms})
+
+
+def qna_list(request):
+    qna_info=[]
+    print(request.user.id)
+    qna_key=MyPageModel.objects.get(id=request.user.id)
+    qna_info=qna_key.qna_key.all()
+    return qna_info
+def mypage_list(request):
+    list=qna_list(request)
+    return render(request, 'mypage/mypage_list.html',{'list':list})

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
 from .forms import UserUpErro
+from mypage.models import MyPageModel
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib import auth
@@ -31,6 +32,11 @@ def signup(request):
                     return render(request, 'user/signup.html') # 사용자가 존재하기 때문에 사용자를 저장하지 않고 회원가입 페이지를 다시 띄움
                 else:
                     UserModel.objects.create_user(username=username, password=password,email=email)
+                    # mypage추가
+                    create_id=UserModel.objects.get(username=username)
+                    print(create_id)
+                    mypage=MyPageModel(user_key=create_id)
+                    mypage.save()
                     return redirect('/signin') # 회원가입이 완료되었으므로 로그인 페이지로 이동
         else:
             print(form.errors)

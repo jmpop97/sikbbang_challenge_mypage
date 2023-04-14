@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Challenge
+from .models import ChallengeModel
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -16,7 +16,7 @@ def posting_challenge(request):
     challenge_genre = request.POST.get('challenge_genre')
     challenge_content = request.POST.get('challenge_content')
     challenge_image = request.FILES.get('challenge_image')
-    challenge = Challenge(chellenge_title=chellenge_title, challenge_name=challenge_name,
+    challenge = ChallengeModel(chellenge_title=chellenge_title, challenge_name=challenge_name,
                           challenge_genre=challenge_genre, challenge_content=challenge_content, challenge_image=challenge_image)
     challenge.save()
 
