@@ -4,12 +4,11 @@ from .models import ChallengeModel
 from django.contrib.auth.decorators import login_required
 
 
-
-
 def delete_challenge(request, id):
     target_challenge = ChallengeModel.objects.get(id=id)
     target_challenge.delete()
     return redirect('/main')
+
 
 def view_main(request):
     challenges = ChallengeModel.objects.all()
@@ -55,14 +54,13 @@ def challenge_detail(request, id):
         return render(request, 'challenge/detail.html', context)
 
 
-
-# title = 제목 (키, 밸류)
 # =========챌린지 검색 view ============
 def challenge_search_view(request):
     query = request.GET.get('q')  # GET에서 파라미터 가져와서 query변수에 할당
     results = ChallengeModel.objects.filter(challenge_title__icontains=query)
     context = {'query': query, 'results': results}
     return render(request, 'challenge/challenge_search.html', context)
+
 
 @login_required
 def delete_challenge(request, id):
