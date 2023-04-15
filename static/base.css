@@ -3,9 +3,13 @@
   padding: 0px;
   list-style: none;
   box-sizing: border-box;
+}
+
+a {
   text-decoration: none;
   color: black;
 }
+
 /*회의시작*/
 html,
 body {
@@ -71,6 +75,17 @@ body {
   margin: 30px;
   font-size: 20px;
   font-weight: bold;
+}
+
+.container {
+  width: 400px;
+  height: 600px;
+
+}
+
+.btn-primary {
+  background-color: #78997d;
+  border-color: #78997d;
 }
 
 .qna_create {

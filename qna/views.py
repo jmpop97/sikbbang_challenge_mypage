@@ -36,9 +36,8 @@ def qna_list_view(request):
 
         return render(request, 'qna/qna_list.html', {'allqna': qna_list})
 
+
 # ==============문의글 등록 view==============
-
-
 @login_required
 def qna_create_view(request):
     if request.method == 'GET':  # GET메소드로 요청 들어 올 경우
@@ -88,6 +87,10 @@ def qna_edit_view(request, pk):
 # ========문의글 삭제 view===========
 @login_required
 def qna_delete_view(request, pk):
-    post = get_object_or_404(QnaModel, pk=pk)
-    post.delete()
-    return redirect('/qna_list')
+    if request.method == "POST":
+        post = get_object_or_404(QnaModel, pk=pk)
+        post.delete()
+        return redirect('/qna_list')
+    else:  # GET 요청일 경우
+        return render(request, 'qna/qna_update.html')
+# 요청이 GET이면 render, POST요청이면 delete
