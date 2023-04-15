@@ -59,7 +59,6 @@ def challenge_search_view(request):
     query = request.GET.get('q')  # GET에서 파라미터 가져와서 query변수에 할당
     results = ChallengeModel.objects.filter(challenge_title__icontains=query)
     context = {'query': query, 'results': results}
-    print(results)
     return render(request, 'challenge/challenge_search.html', context)
 
 
