@@ -40,10 +40,16 @@ def challeng_list(request):
     challeng_info=[]
     challeng_key=MyPageModel.objects.get(id=request.user.id)
     challeng_info=challeng_key.challenge_key.all()
-
     return challeng_info
+
+def comment_list(request):
+    comment_info=[]
+    comment_key=MyPageModel.objects.get(id=request.user.id)
+    comment_info=comment_key.challenge_key.all()
+    return comment_info
 def mypage_list(request):
     list1 = qna_list(request)
     list2 = challeng_list(request)
-    lists=[list1,list2]
+    list3 = comment_list(request)
+    lists=[list1,list2,list3]
     return render(request, 'mypage/mypage_list.html',{'lists':lists})

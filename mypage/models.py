@@ -2,6 +2,7 @@ from django.db import models
 from qna.models import QnaModel
 from user.models import UserModel
 from challenge.models import ChallengeModel
+from comments.models import CommentModel
 # Create your models here.
 
 
@@ -13,7 +14,8 @@ class MyPageModel(models.Model):
         QnaModel, blank=True, related_name='mypage_key')
     challenge_key = models.ManyToManyField(
         ChallengeModel, blank=True, related_name='mypage_key')
-
+    comment_key = models.ManyToManyField(
+        CommentModel, blank=True, related_name='mypage_key')
     def __str__(self):
         return str(self.user_key.username)
 
