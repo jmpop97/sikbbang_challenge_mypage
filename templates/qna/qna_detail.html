@@ -4,15 +4,21 @@
 {% block content %}
 
 
-<div class="qna_detail_box_cover">
-  <form method="post">
-    {% csrf_token %}
-    <div class="detail1">작성자: {{ post.client }} | 작성일: {{ post.qna_created_at|date:'Y. m. d' }}</div>
-    <div class="detail3">제목:{{ post.qna_title }}</div>
-    <span>문의 내용:</span>
-    <div class="detail4">{{ post.qna_content }}</div><br><br>
-    <a class="go_to_edit_btn" type="button" href="{% url 'qna-edit' pk=post.pk %}">Edit</a>
-  </form>
-</div>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-4">
+    <h2>{{post.client}}님의 문의글</h2>
+    <div class="mb-5">
+      <div class="mb-2">작성자: {{ post.client }} | 작성일: {{ post.qna_created_at|date:'Y. m. d' }}</div>
+      <div class="detail3">제목:{{ post.qna_title }}</div>
+      <span>문의 내용:</span>
+      <div class="detail4">{{ post.qna_content }}</div><br><br>
+      <a class="go_to_edit_btn" type="button" href="{% url 'qna-edit' pk=post.pk %}">Edit</a>
+    </div>
+  </div>
+</form>
+
+
+
 
 {% endblock %}

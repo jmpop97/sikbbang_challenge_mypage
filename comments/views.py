@@ -21,8 +21,9 @@ def comment_create(request):  # 작성하기 버튼 클릭 시 모든 인풋값�
         # html에서 받은 각각 인풋값들을 DB에 넣기 위해 변수 선언
         my_comment.comment_content = request.POST.get('comment_content', '')  # 사용자가 입력한 댓글내용
         my_comment.comment_image = request.FILES.get('comment_image')  # 사용자가 업로드한 이미지파일
-
+        my_comment.comment_challenge = "1"
         my_comment.save()    #입력한 값들을 DB에 저장하는 중요한 명령어
+        my_comment.mypage_key.add(request.user.id)
         return redirect('/api/comments')    #저장하고 나면 댓글 보는 화면으로 보낸다.
 
 

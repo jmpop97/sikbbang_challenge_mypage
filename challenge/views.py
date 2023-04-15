@@ -52,7 +52,6 @@ def challenge_detail(request, id):
         return redirect('/main')
 
 
-# title = 제목 (키, 밸류)
 # =========챌린지 검색 view ============
 def challenge_search_view(request):
     query = request.GET.get('q')  # GET에서 파라미터 가져와서 query변수에 할당

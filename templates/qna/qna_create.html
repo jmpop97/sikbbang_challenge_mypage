@@ -4,19 +4,23 @@
 
 
 {% block content %}
-<div class="qna_create_box_cover">
-  <form method="post">
-    {% csrf_token %}
-    <div class="qna_create_box">
-      <label for="name">제목:</label>
-      <input class="qna_title_box" type="text" required id="name" name="title"><br><br>
 
-      <label for="code">문의 내용:</label><br>
-      <textarea class="qna_content_box" required id="code" name="content"></textarea><br><br>
-
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-4">
+    <h2>문의글 작성</h2>
+    <div class="mb-3">
+      <label for="name" class="form-label">제목:</label>
+      <input type="text" required class="form-control" id="name" name="title" placeholder="제목을 입력해주세요.">
+    </div>
+    <div class="mb-3">
+      <label for="Cont_text" class="form-label">문의 내용:</label><br>
+      <textarea class="form-control" id="Cont_text" name="content" rows="3"></textarea><br>
       <button type="submit" class="qna_btn">등록</button>
     </div>
-  </form>
-</div>
+  </div>
+</form>
+
+
 
 {% endblock %}
