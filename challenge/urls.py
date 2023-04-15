@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'challenge'
+app_name = 'challenge_app'
 
 urlpatterns = [
     path('main/', views.view_main, name='view_main'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('search_results/', views.challenge_search_view, name='search-results'),
     path('challenge/<int:id>/edit/',
          views.edit_challenge, name='edit_challenge'),
+
 ]
