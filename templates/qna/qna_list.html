@@ -3,56 +3,51 @@
 {% block content %}
 
 
-<nav>
-  <ul class="qna_create">
-    <li><a href="/qna/create">작성하기</a></li>
-  </ul>
-</nav>
-<br>
-<div class="main_middle">
-  <ul class="cont_txt">
-    <li class="row1">
-      <p>제목</p>
-    </li>
-    <li class="row3">
-      <p>작성자</p>
-    </li>
-    <li class="row5">
-      <p>작성일</p>
-    </li>
-  </ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">제목</th>
+      <th scope="col">작성자</th>
+      <th scope="col">작성일</th>
+    </tr>
+  </thead>
   {% if allqna %}
   {% for qna in allqna %}
-  <section class="cont_box">
-    <ul class="cont_ul">
-      <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.qna_title }}</a></li>
-      <li class="row4">{{ qna.client }}</li>
-      <li class="row6">{{ qna.qna_created_at|date:'Y. m. d' }}</li>
-    </ul>
-    <hr>
-  </section>
+  <tbody>
+    <tr>
+      <td><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.qna_title }}</a></td>
+      <td>{{ qna.client }}</td>
+      <td>{{ qna.qna_created_at|date:'Y. m. d' }}</td>
+    </tr>
+  </tbody>
   {% endfor %}
   {% else %}
   <span>작성된 게시글이 없습니다.</span>
   {% endif %}
+</table>
+<ul class="qna_create">
+  <li><a href="/qna/create">작성하기</a></li>
+</ul>
 
 
-  <div class="pagination">
-    <span class="step-links">
-      {% if allqna.has_previous %} <!--allqna객체가 이전 페이지를 가진 경우-->
-      <a href="?page=1">&laquo; 처음</a>
-      <a href="?page={{ allqna.previous_page_number }}">이전</a>
-      {% endif %}
 
-      <span class="current-page">
-        페이지 {{ allqna.number }} / {{ allqna.paginator.num_pages }}
-      </span> <!--현재페이지 번호 / 전체 페이지 수 출력-->
+<div class="pagination">
+  <span class="step-links">
+    {% if allqna.has_previous %} <!--allqna객체가 이전 페이지를 가진 경우-->
+    <a href="?page=1">&laquo; 처음</a>
+    <a href="?page={{ allqna.previous_page_number }}">이전</a>
+    {% endif %}
 
-      {% if allqna.has_next %} <!--allqna객체가 다음페이지 가진 경우-->
-      <a href="?page={{ allqna.next_page_number }}">다음</a>
-      <a href="?page={{ allqna.paginator.num_pages }}">끝 &raquo;</a>
-      {% endif %}
-    </span>
-  </div>
+    <span class="current-page">
+      페이지 {{ allqna.number }} / {{ allqna.paginator.num_pages }}
+    </span> <!--현재페이지 번호 / 전체 페이지 수 출력-->
+
+    {% if allqna.has_next %} <!--allqna객체가 다음페이지 가진 경우-->
+    <a href="?page={{ allqna.next_page_number }}">다음</a>
+    <a href="?page={{ allqna.paginator.num_pages }}">끝 &raquo;</a>
+    {% endif %}
+  </span>
+</div>
 </div>
 {% endblock %}
