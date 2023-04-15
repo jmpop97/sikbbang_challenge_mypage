@@ -45,7 +45,7 @@
         <a href="/mypage">마이페이지</a>
         <a href="/qna_list/">문의게시판</a>
         <a href="/logout">로그아웃</a>
-        <form method="get" action="{% url 'challenge:search-results' %}">
+        <form method="get" action="{% url 'challenge_app:search-results' %}">
             {% csrf_token %}
             <label for="search_code" style="font-size: 20px; font-weight: bold;">Search</label><br>
             <input type="text" name="q" id="search_code">

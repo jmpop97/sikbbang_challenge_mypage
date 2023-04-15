@@ -8,9 +8,9 @@
 <p>내용 : {{ challenge.challenge_content }}</p>
 <img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}"><br>
 {% if challenge.challenge_author == request.user %}
-<a href="{% url 'challenge:edit_challenge' challenge.id %}">수정</a>
-<a href="{% url 'challenge:delete_challenge' challenge.id %}">삭제</a>
+<a href="{% url 'challenge_app:edit_challenge' challenge.id %}">수정</a>
+<a href="{% url 'challenge_app:delete_challenge' challenge.id %}">삭제</a>
 {% endif %}
-<a href="{% url 'challenge:view_main' %}">목록</a>
+<a href="{% url 'challenge_app:view_main' %}">목록</a>
 
 {% endblock %}
