@@ -23,7 +23,7 @@ Challenge
   {% for challenge in lists.1 %}
   <section class="cont_box">
     <ul class="cont_ul">
-      <li class="row2"><a href="{% url 'challenge:challenge_detail' id=challenge.pk %}">{{ challenge.challenge_title }}</a></li>
+      <li class="row2"><a href="{% url 'challenge_app:challenge_detail' id=challenge.pk %}">{{ challenge.challenge_title }}</a></li>
       <li class="row4">{{ challenge.challenge_name }}</li>
       <li class="row6">{{ ge.challenge_created_at|date:'Y. m. d' }}</li>
     </ul>
