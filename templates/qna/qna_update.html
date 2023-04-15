@@ -3,23 +3,29 @@
 
 {% block content %}
 
-<div class="qna_update_box">
-  <form method="post">
+<form method="post">
+  <div class="mb-4">
     {% csrf_token %}
-    <p>작성자: {{ post.client }}</p>
-    <p>작성일: {{ post.qna_created_at|date:'Y. m. d' }}</p>
-    <label for="name">제목: </label>
-    <input type="text" value="{{ post.qna_title }}" name="inputValue"><br><br>
-    <label for="">문의 내용: </label><br>
-    <textarea type="text" value="{{ post.qna_content }}" name="inputcontent"></textarea><br>
+    <h2>{{post.client}}님의 문의글</h2>
+    <div class="mb-5">
+      <div class="mb-2">작성자: {{ post.client }} | 작성일: {{ post.qna_created_at|date:'Y. m. d' }}</div>
+      <div class="qna_update_box">
+        <label for="name">제목: </label>
+        <input type="text" value="{{ post.qna_title }}" name="inputValue"><br><br>
+        <label for="">문의 내용: </label><br>
+        <textarea style="  display: block; width: 380px;" class="textarea_box" type="text"
+          value="{{ post.qna_content }}" name="inputcontent"></textarea><br>
+      </div>
+      <button class="UD_btn" type="submit">수정</button>
+    </div>
+  </div>
+</form>
+<form method="post" action="{% url 'qna-delete' pk=post.pk %}">
+  {% csrf_token %}
+  <button class="UD_btn_1" type="submit">삭제</button>
+</form>
 
-    <button class="update_btn1" type="submit">수정</button>
-  </form>
 
 
-  <form method="post" action="{% url 'qna-delete' pk=post.pk %}">
-    {% csrf_token %}
-    <button type="submit">삭제</button>
-  </form>
-</div>
+
 {% endblock %}
