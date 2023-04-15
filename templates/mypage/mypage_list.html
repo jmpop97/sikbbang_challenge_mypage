@@ -3,14 +3,37 @@
 {% block content %}
 
 
-<nav>
-  <ul class="qna_create">
-    <li><a href="/qna/create">작성하기</a></li>
-  </ul>
-</nav>
+
 <br>
 
-
+Challenge
+<div class="main_middle">
+  <ul class="cont_txt">
+    <li class="row1">
+      <p>제목</p>
+    </li>
+    <li class="row3">
+      <p>챌린지 이름</p>
+    </li>
+    <li class="row5">
+      <p>작성일</p>
+    </li>
+  </ul>
+  {% if lists.1 %}
+  {% for challenge in lists.1 %}
+  <section class="cont_box">
+    <ul class="cont_ul">
+      <li class="row2"><a href="{% url 'challenge_app:challenge_detail' id=challenge.pk %}">{{ challenge.challenge_title }}</a></li>
+      <li class="row4">{{ challenge.challenge_name }}</li>
+      <li class="row6">{{ ge.challenge_created_at|date:'Y. m. d' }}</li>
+    </ul>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <span>작성된 게시글이 없습니다.</span>
+    {% endif %}
+  </section>
+</div>
 
 Q&A
 <div class="main_middle">
@@ -25,8 +48,8 @@ Q&A
       <p>작성일</p>
     </li>
   </ul>
-  {% if list %}
-  {% for qna in list %}
+  {% if lists.0 %}
+  {% for qna in lists.0 %}
   <section class="cont_box">
     <ul class="cont_ul">
       <li class="row2"><a href="{% url 'qna-detail' pk=qna.pk %}">{{ qna.qna_title }}</a></li>
@@ -40,26 +63,29 @@ Q&A
     {% endif %}
   </section>
 </div>
-Challenge
+
+
+
+comment
 <div class="main_middle">
   <ul class="cont_txt">
     <li class="row1">
       <p>제목</p>
     </li>
     <li class="row3">
-      <p>작성자</p>
+      <p>챌린지 이름</p>
     </li>
     <li class="row5">
       <p>작성일</p>
     </li>
   </ul>
-  {% if lists.1 %}
-  {% for challenge in lists.1 %}
+  {% if lists.2 %}
+  {% for comment in lists.2 %}
   <section class="cont_box">
     <ul class="cont_ul">
-      <li class="row2"><a href="{% url 'challenge-detail' pk=challenge.pk %}">{{ challenge.challenge_title }}</a></li>
-      <li class="row4">{{ challenge.challenge_client }}</li>
-      <li class="row6">{{ challenge.challenge_created_at|date:'Y. m. d' }}</li>
+      <li class="row2"><a >{{ comment.comment_content }}</a></li>
+      <li class="row4">{{ comment.comment_writer }}</li>
+      <li class="row6">{{ comment.comment_created_at|date:'Y. m. d' }}</li>
     </ul>
     <hr>
     {% endfor %}

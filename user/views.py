@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
+    form =UserUpErro()
     if request.method == 'GET': # GET 메서드로 요청이 들어 올 경우
         user = request.user.is_authenticated
         if user:
@@ -39,7 +40,7 @@ def signup(request):
                     return redirect('/signin') # 회원가입이 완료되었으므로 로그인 페이지로 이동
         else:
             print(form.errors)
-    return render(request, 'user/signup.html')
+    return render(request, 'user/signup.html',{"form":form})
 
 
 
