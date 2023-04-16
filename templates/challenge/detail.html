@@ -47,8 +47,8 @@
   <div class="edit_delete">
     <a class="edit_button" type="button" href="{% url 'challenge_app:edit_challenge' challenge.id %}">수정하기</a>
     <a class="edit_button" type="button" href="{% url 'challenge_app:delete_challenge' challenge.id %}">삭제</a>
-    <a class="edit_button" type="button" href="{% url 'challenge_app:view_main' %}">목록</a>
     {% endif %}
+    <a class="edit_button" type="button" href="{% url 'challenge_app:view_main' %}">목록</a>
   </div>
 </div>
 
