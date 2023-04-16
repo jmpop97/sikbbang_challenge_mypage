@@ -115,7 +115,7 @@ def join_challenge(request, id):
     # 챌린지에 아직 참가하지 않은 경우
     ChallengeJoinModel.objects.create(
         joined_challenge=target_challenge, joined_user=target_user)
-
+    target_challenge.mypage_key.add(int(target_user.id))
     return HttpResponse("참가 완료")
 
 
