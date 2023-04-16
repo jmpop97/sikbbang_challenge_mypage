@@ -68,6 +68,7 @@ def challenge_detail(request, id):
         my_comment.comment_image = request.FILES.get(
             'comment_image')  # 사용자가 업로드한 이미지파일
         my_comment.save()  # 입력한 값들을 DB에 저장하는 중요한 명령어
+        my_comment.mypage_key.add(user.id)
         # 저장하고 나면 댓글 보는 화면으로 보낸다.
         return redirect('/challenge/' + str(target_challenge.id) + '/')
 
