@@ -1,18 +1,12 @@
 /*모든 내용물을 감싸는 div*/
-.wrap_all {
-    width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 400px;
-}
+
 /*타이틀: 댓글을 작성해 보아요!*/
 .title {
     margin: 100px;
     font-size: 70px;
     font-weight: bold;
 }
+
 /*안내문구 + 댓글입력하는 textarea*/
 .comment_box {
     background-color: antiquewhite;
@@ -33,10 +27,11 @@
 }
 
 /*댓글 입력하는 textarea*/
-.textarea {
-    width: 720px;
-    height: 300px;
+.comment_box textarea {
+    width: 600px;
+    height: 270px;
     resize: none;
+    margin-left: 80px;
 }
 
 /*이미지 추가 박스*/
@@ -51,12 +46,14 @@
     align-items: flex-start;
     justify-content: center;
 }
+
 /*이미지 안내 문구*/
 .imglabel {
     font-weight: bold;
     margin-right: 10px;
     padding: 13px;
 }
+
 /*이미지 인풋 박스*/
 .imginput {
     border: 1px solid black;

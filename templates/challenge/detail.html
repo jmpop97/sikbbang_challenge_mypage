@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
 
 <p>제목 : {{ challenge.challenge_title }}</p>
 <p>작성자 : {{ challenge.challenge_author }}</p>
@@ -7,10 +12,64 @@
 <p>도전 장르 : {{ challenge.challenge_genre }}</p>
 <p>내용 : {{ challenge.challenge_content }}</p>
 <img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}"><br>
+<!-- <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image"> -->
 {% if challenge.challenge_author == request.user %}
 <a href="{% url 'challenge_app:edit_challenge' challenge.id %}">수정</a>
 <a href="{% url 'challenge_app:delete_challenge' challenge.id %}">삭제</a>
 {% endif %}
 <a href="{% url 'challenge_app:view_main' %}">목록</a>
+
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="wrap_all">
+    <h1 class="title">댓글을 작성해 보아요!</h1>
+    <div class="comment_box">
+      <span class="commentspan"><label for="comment_content">댓글 내용:</label></span>
+      <span><textarea class="textarea" id="comment_content" required name="comment_content"></textarea></span>
+    </div>
+    <div class="img_box">
+      <label class="imglabel" for="comment_image">이미지 파일 추가하기:</label> <!-- 자세한 코드는 DB 가용성 보고 수정 -->
+      <input class="imginput" type="file" id="comment_image" name="comment_image" onchange="setThumbnail(event);">
+      <!-- <input type="submit" value="등록하기"> -->
+    </div>
+    <button class="submitbtn" type="submit">등록</button>
+  </div>
+</form>
+
+
+<div class="wrap_all">
+  <h1 class="title">인증 후기</h1>
+  {% if all_comment %}
+  {% for comment in all_comment %}
+  <div class="one_comment">
+    <p class="writer_date">
+      <span>닉네임: {{ comment.comment_writer }}</span>
+      <span>작성일: {{ comment.comment_created_at }}</span>
+    </p>
+    <div class="wrap_img_content">
+      <div class="img_container">
+        {% if comment.comment_image %}
+        <img src="{{ comment.comment_image.url }}" alt="comment_image">
+        {% else %}
+        <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image">
+        {% endif %}
+      </div>
+      <span class="comment_content">{{ comment.comment_content }}</span>
+    </div>
+    {% if comment.comment_writer == user %}
+    <div class="edit_delete">
+      <a class="edit_button" type="button" href="{% url 'challenge_app:comment_update' comment.id %}">수정하기</a>
+      <form method="post" action="{% url 'challenge_app:comment_delete' comment.pk %}">
+        {% csrf_token %}
+        <button class="delete_button" type="submit">삭제하기</button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
 
 {% endblock %}
