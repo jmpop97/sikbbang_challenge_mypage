@@ -12,3 +12,6 @@ class UserUpErro(forms.ModelForm):
         model = PasswordForm
         fields=['username','email','password','password2']
         widgets = {"password": PasswordInput(), "password2": PasswordInput()}
+        error_messages={
+            'email':{
+                'unique': ("동일한 이메일이 존재합니다")}}
