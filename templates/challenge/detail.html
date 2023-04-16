@@ -13,6 +13,23 @@
 <p>내용 : {{ challenge.challenge_content }}</p>
 <img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}"><br>
 <!-- <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image"> -->
+
+{% if is_joined %}
+{% if is_completed %}
+<button disabled>이미 완료</button>
+{% else %}
+<form action="{% url 'challenge_app:complete_challenge' challenge.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="완료하기">
+</form>
+{% endif %}
+{% else %}
+<form action="{% url 'challenge_app:join_challenge' challenge.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="참가하기">
+</form>
+{% endif %}
+
 {% if challenge.challenge_author == request.user %}
 <a href="{% url 'challenge_app:edit_challenge' challenge.id %}">수정</a>
 <a href="{% url 'challenge_app:delete_challenge' challenge.id %}">삭제</a>
