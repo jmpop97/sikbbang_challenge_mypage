@@ -15,19 +15,20 @@
 <!-- <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image"> -->
 
 
+
 {% if is_joined %}
 {% if is_completed %}
 <button disabled>이미 완료</button>
 {% else %}
 <form action="{% url 'challenge_app:complete_challenge' challenge.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="완료하기">
+  {% csrf_token %}
+  <input type="submit" value="완료하기">
 </form>
 {% endif %}
 {% else %}
 <form action="{% url 'challenge_app:join_challenge' challenge.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="참가하기">
+  {% csrf_token %}
+  <input type="submit" value="참가하기">
 </form>
 {% endif %}
 

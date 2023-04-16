@@ -3,6 +3,8 @@
   padding: 0px;
   list-style: none;
   box-sizing: border-box;
+  font-family: 'Poor Story', cursive;
+  font-size: 20px;
 }
 
 a {
@@ -263,7 +265,13 @@ body {
   border: solid 0.1px rgb(126, 152, 126);
 }
 
-.form {
-  width: 900px;
-  height: 1000px;
+.col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-left: 20px;
+  margin-bottom: 20px
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<form action="#" method="POST">
+<form action="#" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="challenge_title">제목</label>
     <input class="form-control" type="text" name="challenge_title" value="{{ challenge.challenge_title }}" /><br />
