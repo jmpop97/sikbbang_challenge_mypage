@@ -127,8 +127,9 @@
     {% for comment in lists.2 %}
     <tbody>
         <tr>
-            <td><a href="{% url 'challenge_app:challenge_detail' id=comment.comment_challenge.id %}">{{
-                    comment.comment_challenge.challenge_name }}</a></td>
+            <td><a
+                    href="{% url 'challenge_app:challenge_detail' id=comment.comment_challenge.id %}">{{comment.comment_challenge.challenge_name}}</a>
+            </td>
             <td>{{ comment.comment_content }}</td>
             <td>{{ comment.comment_created_at|date:'Y. m. d' }}</td>
         </tr>

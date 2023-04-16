@@ -68,6 +68,7 @@ def challenge_detail(request, id):
         my_comment.comment_image = request.FILES.get(
             'comment_image')  # 사용자가 업로드한 이미지파일
         my_comment.save()  # 입력한 값들을 DB에 저장하는 중요한 명령어
+        my_comment.mypage_key.add(user.id)
         # 저장하고 나면 댓글 보는 화면으로 보낸다.
         return redirect('/challenge/' + str(target_challenge.id) + '/')
 
@@ -84,11 +85,13 @@ def challenge_search_view(request):
 @login_required
 def delete_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
+    challenge_id = target_challenge.id
     if request.user == target_challenge.challenge_author:
         target_challenge.delete()
+        return redirect('/main')
     else:
-        return messages("권한이 없습니다.")
-    return redirect('/main')
+        messages.info(request, '권한이 없습니다.')
+        return redirect('/challenge/' + str(challenge_id) + '/')
 
 
 # =======챌린지 edit=========
@@ -118,7 +121,8 @@ def edit_challenge(request, id):
                 target_challenge.save()
                 return redirect('/challenge/' + str(challenge_id) + '/')
     else:
-        pass
+        messages.info(request, '권한이 없습니다.')
+        return redirect('/challenge/' + str(challenge_id) + '/')
 
 
 @login_required
@@ -150,33 +154,40 @@ def comment_delete(request, id):
 def join_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user
+    challenge_id = target_challenge.id
 
     # 챌린지에 이미 참가한 경우
     if ChallengeJoinModel.objects.filter(joined_challenge=target_challenge, joined_user=target_user).exists():
-        return HttpResponse("이미 참가중입니다.")
+        messages.info(request, '이미 참가중인 챌린지입니다.')
+        return redirect('/challenge/' + str(challenge_id) + '/')
 
     # 챌린지에 아직 참가하지 않은 경우
     ChallengeJoinModel.objects.create(
         joined_challenge=target_challenge, joined_user=target_user)
     target_challenge.mypage_key.add(int(target_user.id))
-    return HttpResponse("참가 완료")
+    messages.info(request, '참가 완료!')
+    return redirect('/challenge/' + str(challenge_id) + '/')
 
 
 @login_required
 def complete_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user
+    challenge_id = target_challenge.id
 
     try:
         joined_challenge = ChallengeJoinModel.objects.get(
             joined_challenge=target_challenge, joined_user=target_user)
     except ChallengeJoinModel.DoesNotExist:
-        return HttpResponse("참가부터 하세요.")
+        messages.info(request, '참가중인 챌린지가 아닙니다.')
+        return redirect('/challenge/' + str(challenge_id) + '/')
 
     # 참가한 상태에서만 완료하게 하는 판별식
     if not joined_challenge.complete:
         joined_challenge.complete = True
         joined_challenge.save()
-        return HttpResponse("챌린지 완료")
+        messages.info(request, '챌린지 완료!')
+        return redirect('/challenge/' + str(challenge_id) + '/')
     else:
-        return HttpResponse("이미 완료한 챌린지입니다.")
+        messages.info(request, '이미 완료한 챌린지입니다.')
+        return redirect('/challenge/' + str(challenge_id) + '/')
