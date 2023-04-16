@@ -92,5 +92,5 @@ def qna_delete_view(request, pk):
         post.delete()
         return redirect('/qna_list')
     else:  # GET 요청일 경우
-        return render(request, 'qna/qna_update.html')
+        return render(request, 'qna/qna_update.html',)
 # 요청이 GET이면 render, POST요청이면 delete

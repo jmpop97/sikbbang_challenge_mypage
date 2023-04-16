@@ -10,8 +10,11 @@ class MyPageModel(models.Model):
     class Meta:
         db_table = "my_page"
     user_key = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+
     qna_key = models.ManyToManyField(
         QnaModel, blank=True, related_name='mypage_key')
+
+
     challenge_key = models.ManyToManyField(
         ChallengeModel, blank=True, related_name='mypage_key')
     comment_key = models.ManyToManyField(
