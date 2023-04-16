@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-
+{% load static %}
 <br>
 
 <a href="{% url 'challenge_app:view_posting_challenge' %}" class="btn btn-primary">챌린지 작성하기</a>
@@ -7,34 +7,28 @@
 <br><br>
 
 <div class="col">
-  {% for challenge in challenges %}
-  <div class="card" style="width: 18rem;">
-    <a href="{% url 'challenge_app:challenge_detail' challenge.id %}"><img
-        src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}" class="card-img-top"
-        alt=alt="{{ result.challenge_title }}"></a>
-    <div class="card-body">
-      <h5 class="card-title">{{result.challenge_title}}</h5>
-      <p class="card-text">챌린지명 : {{ challenge.challenge_name }}
-      </p>
-      <p class="card-text">작성자 : {{ challenge.challenge_author }}
-      </p>
-      <p class="card-text">작성일 : {{ challenge.challenge_created_at |date:'Y. m. d'}}
-      </p>
-      <a href="{% url 'challenge_app:challenge_detail' challenge.id %}" class="btn btn-primary">상세보기</a>
+    {% for challenge in challenges %}
+    <div class="card" style="width: 18rem;">
+        <a href="{% url 'challenge_app:challenge_detail' challenge.id %}">
+            {% if challenge.challenge_image %}
+            <img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}" class="card-img-top"
+                alt="{{ result.challenge_title }}">
+            {% else %}
+            <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image">
+            {% endif %}
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{result.challenge_title}}</h5>
+            <p class="card-text">챌린지명 : {{ challenge.challenge_name }}
+            </p>
+            <p class="card-text">작성자 : {{ challenge.challenge_author }}
+            </p>
+            <p class="card-text">작성일 : {{ challenge.challenge_created_at |date:'Y. m. d'}}
+            </p>
+            <a href="{% url 'challenge_app:challenge_detail' challenge.id %}" class="btn btn-primary">상세보기</a>
+        </div>
     </div>
-  </div>
-  {% endfor %}
+    {% endfor %}
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

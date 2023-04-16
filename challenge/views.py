@@ -38,14 +38,15 @@ def posting_challenge(request):
         else:
             pass
     else:
-        return redirect('/main')
+        return redirect('/main/')
 
 
 @login_required
 def challenge_detail(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     if request.method == 'GET':
-        all_comment = CommentModel.objects.all().order_by("-comment_created_at")
+        all_comment = CommentModel.objects.filter(
+            comment_challenge=target_challenge).order_by("-comment_created_at")
         user = request.user
         is_joined = ChallengeJoinModel.objects.filter(
             joined_challenge=target_challenge, joined_user=user).exists()
@@ -88,7 +89,7 @@ def delete_challenge(request, id):
     challenge_id = target_challenge.id
     if request.user == target_challenge.challenge_author:
         target_challenge.delete()
-        return redirect('/main')
+        return redirect('/main/')
     else:
         messages.info(request, '권한이 없습니다.')
         return redirect('/challenge/' + str(challenge_id) + '/')
