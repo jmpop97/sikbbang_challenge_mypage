@@ -43,13 +43,18 @@ def posting_challenge(request):
 @login_required
 def challenge_detail(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
-    if request.method == 'GET':
-        context = {
-            'challenge': target_challenge
-        }
-        return render(request, 'challenge/detail.html', context)
-    else:
-        return redirect('/main')
+    user = request.user
+    is_joined = ChallengeJoinModel.objects.filter(
+        joined_challenge=target_challenge, joined_user=user).exists()
+    is_completed = ChallengeJoinModel.objects.filter(
+        joined_challenge=target_challenge, joined_user=user, complete=True).exists()
+
+    context = {
+        'challenge': target_challenge,
+        'is_joined': is_joined,
+        'is_completed': is_completed,
+    }
+    return render(request, 'challenge/detail.html', context)
 
 
 # =========챌린지 검색 view ============
@@ -104,7 +109,7 @@ def join_challenge(request, id):
     target_user = request.user
 
     # 챌린지에 이미 참가한 경우
-    if ChallengeJoinModel.objects.filter(joined_challenge=target_challenge, joined_user=target_user).exists:
+    if ChallengeJoinModel.objects.filter(joined_challenge=target_challenge, joined_user=target_user).exists():
         return HttpResponse("이미 참가중입니다.")
 
     # 챌린지에 아직 참가하지 않은 경우

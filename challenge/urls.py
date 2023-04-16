@@ -14,5 +14,7 @@ urlpatterns = [
     path('search_results/', views.challenge_search_view, name='search-results'),
     path('challenge/<int:id>/edit/',
          views.edit_challenge, name='edit_challenge'),
-
+    path('challenge/<int:id>/join/', views.join_challenge, name='join_challenge'),
+    path('challenge/<int:id>/complete/',
+         views.complete_challenge, name='complete_challenge'),
 ]
