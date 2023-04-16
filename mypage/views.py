@@ -79,24 +79,3 @@ def mypage_list(request):
     pagelist3 = page_list(list1, 10, page1)
     lists = [pagelist1, pagelist2, pagelist3]
     return render(request, 'mypage/mypage_list.html', {'lists': lists})
-
-
-# def mypage_list(request):
-#     if request.method == 'POST':
-#         test=request.POST.get('password', None)
-#         print(test)
-#     list1 = qna_list(request)
-#     list2 = challeng_list(request)
-#     list3 = comment_list(request)
-#     page1 = request.GET.get('page1')
-#     page2 = request.GET.get('page2')
-#     page3 = request.GET.get('page3')
-#     # paginator1 = page_list(list1, 2, page1)
-#     # paginator2 = page_list(list2, 2, page2)
-#     # paginator3 = page_list(list3, 2, page3)
-#
-#     # print(paginator1)
-#
-#     # lists = [paginator1, paginator2, paginator3]
-#     lists=[list1,list2,list3]
-#     return render(request, 'mypage/mypage_list.html', {'lists': lists},{"pages":[1,1,1]})
