@@ -14,12 +14,12 @@ def view_main(request):
     return render(request, 'main.html', context)
 
 
-@login_required
+@login_required(login_url='/signin/')
 def view_posting_challenge(request):
     return render(request, 'challenge/posting.html')
 
 
-@login_required
+@login_required(login_url='/signin/')
 def posting_challenge(request):
     if request.method == 'POST':
         challenge_author = request.user  # 현재 로그인한 유저
@@ -41,7 +41,7 @@ def posting_challenge(request):
         return redirect('/main/')
 
 
-@login_required
+@login_required(login_url='/signin/')
 def challenge_detail(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     if request.method == 'GET':
@@ -83,7 +83,7 @@ def challenge_search_view(request):
 
 
 # =======챌린지 삭제=============
-@login_required
+@login_required(login_url='/signin/')
 def delete_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     challenge_id = target_challenge.id
@@ -96,7 +96,7 @@ def delete_challenge(request, id):
 
 
 # =======챌린지 edit=========
-@login_required
+@login_required(login_url='/signin/')
 def edit_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     challenge_id = target_challenge.id
@@ -126,7 +126,7 @@ def edit_challenge(request, id):
         return redirect('/challenge/' + str(challenge_id) + '/')
 
 
-@login_required
+@login_required(login_url='/signin/')
 def comment_update(request, id):
     post_del = get_object_or_404(CommentModel, id=id)
     post = post_del.comment_writer.id
@@ -141,7 +141,7 @@ def comment_update(request, id):
     return redirect('/challenge/' + str(post) + '/')
 
 
-@login_required
+@login_required(login_url='/signin/')
 def comment_delete(request, id):
     if request.method == "POST":
         post = get_object_or_404(CommentModel, id=id)
@@ -151,7 +151,7 @@ def comment_delete(request, id):
     return redirect('/challenge/' + str(post_del) + '/')
 
 
-@login_required
+@login_required(login_url='/signin/')
 def join_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user
@@ -170,7 +170,7 @@ def join_challenge(request, id):
     return redirect('/challenge/' + str(challenge_id) + '/')
 
 
-@login_required
+@login_required(login_url='/signin/')
 def complete_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user

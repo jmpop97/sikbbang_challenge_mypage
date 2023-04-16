@@ -25,6 +25,7 @@ def signup(request):
             password = request.POST.get('password', None)
             password2 = request.POST.get('password2', None)
             if password != password2:
+                messages.info(request, '비밀번호가 일치하지 않습니다.')
                 return render(request, 'user/signup.html')
             else:
                 exist_user = get_user_model().objects.filter(username=username)
@@ -38,7 +39,8 @@ def signup(request):
                     create_id = UserModel.objects.get(username=username)
                     mypage = MyPageModel(user_key=create_id)
                     mypage.save()
-                    return redirect('/signin')  # 회원가입이 완료되었으므로 로그인 페이지로 이동
+                    messages.info(request, '회원가입 완료!')
+                    return redirect('/signin/')  # 회원가입이 완료되었으므로 로그인 페이지로 이동
         else:
             print(form.errors)
     return render(request, 'user/signup.html', {"form": form})
@@ -56,7 +58,7 @@ def signin(request):
             return redirect('/')
         else:  # 로그인이 실패하면 다시 로그인 페이지를 보여주기
             messages.info(request, '아이디 또는 비밀번호를 확인해주세요.')
-            return redirect('/signin')
+            return redirect('/signin/')
     elif request.method == 'GET':
         user = request.user.is_authenticated
         if user:
@@ -68,4 +70,4 @@ def signin(request):
 @login_required
 def logout(request):
     auth.logout(request)  # 인증 되어있는 정보를 없애기
-    return redirect("/")
+    return redirect('/signin/')
