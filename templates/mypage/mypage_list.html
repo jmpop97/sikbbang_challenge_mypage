@@ -115,18 +115,18 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">제목</th>
-      <th scope="col">작성자</th>
+      <th scope="col">챌린지</th>
+      <th scope="col">작성 댓글</th>
       <th scope="col">작성일</th>
     </tr>
   </thead>
-  {% if lists.1 %}
-  {% for challenge in lists.1 %}
+  {% if lists.2 %}
+  {% for comment in lists.2 %}
   <tbody>
     <tr>
-      <td><a href="{% url 'challenge_app:challenge_detail' id=challenge.pk %}">{{ challenge.challenge_title }}</a></td>
-      <td>{{ challenge.challenge_client }}</td>
-      <td>{{ challenge.challenge_created_at|date:'Y. m. d' }}</td>
+      <td><a>{{ comment.comment_challenge.challenge_name }}</a></td>
+      <td>{{ comment.comment_content }}</td>
+      <td>{{ comment.comment_created_at|date:'Y. m. d' }}</td>
     </tr>
   </tbody>
   {% endfor %}
