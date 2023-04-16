@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import ChallengeModel, ChallengeJoinModel
+from comments.models import CommentModel
 from django.contrib.auth.decorators import login_required
+from .models import ChallengeModel, ChallengeJoinModel
 
 
 def view_main(request):
@@ -19,7 +21,6 @@ def view_posting_challenge(request):
 
 @login_required
 def posting_challenge(request):
-
     if request.method == 'POST':
         challenge_author = request.user  # 현재 로그인한 유저
         challenge_title = request.POST.get('challenge_title')
@@ -33,7 +34,7 @@ def posting_challenge(request):
             challenge.save()
             challenge.mypage_key.add(request.user.id)
             challenge_id = challenge.id
-            return redirect('/challenge/' + str(challenge_id))
+            return redirect('/challenge/' + str(challenge_id) + '/')
         else:
             pass
     else:
@@ -43,18 +44,32 @@ def posting_challenge(request):
 @login_required
 def challenge_detail(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
-    user = request.user
-    is_joined = ChallengeJoinModel.objects.filter(
-        joined_challenge=target_challenge, joined_user=user).exists()
-    is_completed = ChallengeJoinModel.objects.filter(
-        joined_challenge=target_challenge, joined_user=user, complete=True).exists()
-
-    context = {
-        'challenge': target_challenge,
-        'is_joined': is_joined,
-        'is_completed': is_completed,
-    }
-    return render(request, 'challenge/detail.html', context)
+    if request.method == 'GET':
+        all_comment = CommentModel.objects.all().order_by("-comment_created_at")
+        user = request.user
+        is_joined = ChallengeJoinModel.objects.filter(
+            joined_challenge=target_challenge, joined_user=user).exists()
+        is_completed = ChallengeJoinModel.objects.filter(
+            joined_challenge=target_challenge, joined_user=user, complete=True).exists()
+        context = {
+            'challenge': target_challenge,
+            'all_comment': all_comment,
+            'is_joined': is_joined,
+            'is_completed': is_completed,
+        }
+        return render(request, 'challenge/detail.html', context)
+    if request.method == 'POST':
+        user = request.user
+        my_comment = CommentModel()
+        my_comment.comment_challenge = target_challenge
+        my_comment.comment_writer = user
+        my_comment.comment_content = request.POST.get(
+            'comment_content', '')  # 사용자가 입력한 댓글내용
+        my_comment.comment_image = request.FILES.get(
+            'comment_image')  # 사용자가 업로드한 이미지파일
+        my_comment.save()  # 입력한 값들을 DB에 저장하는 중요한 명령어
+        # 저장하고 나면 댓글 보는 화면으로 보낸다.
+        return redirect('/challenge/' + str(target_challenge.id) + '/')
 
 
 # =========챌린지 검색 view ============
@@ -65,6 +80,7 @@ def challenge_search_view(request):
     return render(request, 'challenge/challenge_search.html', context)
 
 
+# =======챌린지 삭제=============
 @login_required
 def delete_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
@@ -75,9 +91,11 @@ def delete_challenge(request, id):
     return redirect('/main')
 
 
+# =======챌린지 edit=========
 @login_required
 def edit_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
+    challenge_id = target_challenge.id
     if request.user == target_challenge.challenge_author:
         if request.method == 'GET':
             context = {
@@ -85,7 +103,7 @@ def edit_challenge(request, id):
             }
             return render(request, 'challenge/detail_edit.html', context)
 
-        elif request.method == 'POST':
+        if request.method == 'POST':
             target_challenge.challenge_title = request.POST.get(
                 'challenge_title')
             target_challenge.challenge_name = request.POST.get(
@@ -95,15 +113,40 @@ def edit_challenge(request, id):
             target_challenge.challenge_content = request.POST.get(
                 'challenge_content')
             target_challenge.challenge_image = request.FILES.get(
-                'challenge_image')
+                'challenge_image') or target_challenge.challenge_image
             if target_challenge.challenge_title and target_challenge.challenge_name and target_challenge.challenge_genre and target_challenge.challenge_content:
                 target_challenge.save()
-                challenge_id = target_challenge.id
-                return redirect('/challenge/' + str(challenge_id))
+                return redirect('/challenge/' + str(challenge_id) + '/')
     else:
-        return HttpResponse("권한이 없습니다.")
+        pass
 
 
+@login_required
+def comment_update(request, id):
+    post_del = get_object_or_404(CommentModel, id=id)
+    post = post_del.comment_writer.id
+
+    if request.method == "GET":
+        context = {"post_del": post_del}
+        return render(request, "challenge/comment_update.html", context)
+    if request.method == "POST":
+        post_del.comment_content = request.POST["inputValue"]
+        post_del.comment_image = request.FILES.get('input_image')
+        post_del.save()
+    return redirect('/challenge/' + str(post) + '/')
+
+
+@login_required
+def comment_delete(request, id):
+    if request.method == "POST":
+        post = get_object_or_404(CommentModel, id=id)
+        post_del = post.comment_writer.id
+        post.delete()
+
+    return redirect('/challenge/' + str(post_del) + '/')
+
+
+@login_required
 def join_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user
@@ -115,10 +158,11 @@ def join_challenge(request, id):
     # 챌린지에 아직 참가하지 않은 경우
     ChallengeJoinModel.objects.create(
         joined_challenge=target_challenge, joined_user=target_user)
-
+    target_challenge.mypage_key.add(int(target_user.id))
     return HttpResponse("참가 완료")
 
 
+@login_required
 def complete_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user
