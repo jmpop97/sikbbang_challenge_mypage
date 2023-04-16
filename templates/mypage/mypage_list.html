@@ -47,7 +47,8 @@
 
     {% if lists.0.has_next %} <!--allqna객체가 다음페이지 가진 경우-->
     <a href="?page1={{ lists.0.next_page_number }}&page2={{ lists.1.number }}&page3={{ lists.2.number }}">다음</a>
-    <a href="?page1={{ lists.0.paginator.num_pages }}&page2={{ lists.1.number }}&page3={{ lists.2.number }}">끝 &raquo;</a>
+    <a href="?page1={{ lists.0.paginator.num_pages }}&page2={{ lists.1.number }}&page3={{ lists.2.number }}">끝
+      &raquo;</a>
     {% endif %}
   </span>
 </div>
@@ -101,7 +102,8 @@
 
     {% if lists.1.has_next %} <!--allqna객체가 다음페이지 가진 경우-->
     <a href="?page1={{ lists.0.number }}&page2={{ lists.1.next_page_number }}&page3={{ lists.2.number }}">다음</a>
-    <a href="?page1={{ lists.0.number }}&page2={{ lists.1.paginator.num_pages }}&page3={{ lists.2.number }}">끝 &raquo;</a>
+    <a href="?page1={{ lists.0.number }}&page2={{ lists.1.paginator.num_pages }}&page3={{ lists.2.number }}">끝
+      &raquo;</a>
     {% endif %}
   </span>
 </div>
@@ -115,18 +117,18 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">챌린지</th>
-      <th scope="col">작성 댓글</th>
+      <th scope="col">제목</th>
+      <th scope="col">작성댓글</th>
       <th scope="col">작성일</th>
     </tr>
   </thead>
-  {% if lists.2 %}
-  {% for comment in lists.2 %}
+  {% if lists.1 %}
+  {% for challenge in lists.1 %}
   <tbody>
     <tr>
-      <td><a href="{% url 'challenge_app:challenge_detail' id=comment.comment_challenge.id %}">{{ comment.comment_challenge.challenge_name }}</a></td>
-      <td>{{ comment.comment_content }}</td>
-      <td>{{ comment.comment_created_at|date:'Y. m. d' }}</td>
+      <td><a href="{% url 'challenge_app:challenge_detail' id=challenge.pk %}">{{ challenge.challenge_title }}</a></td>
+      <td>{{ challenge.challenge_client }}</td>
+      <td>{{ challenge.challenge_created_at|date:'Y. m. d' }}</td>
     </tr>
   </tbody>
   {% endfor %}
@@ -155,7 +157,8 @@
 
     {% if lists.2.has_next %} <!--allqna객체가 다음페이지 가진 경우-->
     <a href="?page1={{ lists.0.number }}&page2={{ lists.1.number }}&page3={{ lists.2.next_page_number }}">다음</a>
-    <a href="?page1={{ lists.0.number }}&page2={{ lists.1.number }}&page3={{ lists.2.paginator.num_pages }}">끝 &raquo;</a>
+    <a href="?page1={{ lists.0.number }}&page2={{ lists.1.number }}&page3={{ lists.2.paginator.num_pages }}">끝
+      &raquo;</a>
     {% endif %}
   </span>
 </div>
