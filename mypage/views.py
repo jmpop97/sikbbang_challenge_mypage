@@ -73,9 +73,9 @@ def mypage_list(request):
     page2 = request.GET.get('page2')
     page3 = request.GET.get('page3')
 
-
-    pagelist1=page_list(list1,10,page1)
-    pagelist2 = page_list(list2, 10, page2)
-    pagelist3 = page_list(list1, 10, page1)
+    page_limit=3
+    pagelist1=page_list(list1,page_limit,page1)
+    pagelist2 = page_list(list2, page_limit, page2)
+    pagelist3 = page_list(list1, page_limit, page1)
     lists = [pagelist1, pagelist2, pagelist3]
     return render(request, 'mypage/mypage_list.html', {'lists': lists})
