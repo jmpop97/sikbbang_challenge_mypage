@@ -3,17 +3,29 @@
 {% block content %}
 
 
-{% if results %}
-<ul>
+<br><br>
+<div class="col">
+  {% if results %}
   {% for result in results %}
-  <li>{{ result.challenge_title }}</li>
-  <li>작성자 : {{ result.challenge_author }}</li>
-  <li>챌린지명 : {{ result.challenge_name }}</li>
-  <img src="{{ MEDIA_URL }}{{ result.challenge_image.url }}" alt="{{ result.challenge_title }}">
+  <div class="card" style="width: 18rem;">
+    <a href="{% url 'challenge_app:challenge_detail' id=result.id %}"><img
+        src="{{ MEDIA_URL }}{{ result.challenge_image.url }}" class="card-img-top"
+        alt=alt="{{ result.challenge_title }}"></a>
+    <div class="card-body">
+      <h5 class="card-title">{{result.challenge_title}}</h5>
+      <p class="card-text">작성자 : {{ result.challenge_author }}
+      </p>
+      <p class="card-text">챌린지명 : {{ result.challenge_name }}
+      </p>
+      <a href="{% url 'challenge_app:challenge_detail' id=result.id %}" class="btn btn-primary">상세보기</a>
+    </div>
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% else %}
 <p>결과가 없습니다</p>
 {% endif %}
+
+
 
 {% endblock %}

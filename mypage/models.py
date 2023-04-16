@@ -20,6 +20,7 @@ class MyPageModel(models.Model):
         return str(self.user_key.username)
 
     def save(self, *args, **kwargs):
-        self.id = self.user_key.id
+        if self.id != self.user_key.id:
+            self.id = self.user_key.id
         super().save(self, *args, **kwargs)
         return

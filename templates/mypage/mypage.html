@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-{% for form in forms %}
-    <form method="post" >
+    {% for form in forms %}
+    <form method="post">
         =================================
-    <!-- #3 -->
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit"> 데이터주기 </button>
-    <button type="button" onclick="location.href='/test' ">test로</button>
+        <!-- #3 -->
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit"> 데이터주기 </button>
+        <button type="button" onclick="location.href='/test' ">test로</button>
     </form>
-{% endfor %}
+    {% endfor %}
 </body>
+
 </html>

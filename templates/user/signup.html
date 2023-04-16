@@ -42,7 +42,11 @@
 
   </div>
 </div> -->
-
+<div>
+{% if form.errors %}
+{{form.errors}}
+{% endif %}
+</div>
 <br>
 <div class="container">
   <form class="form-area" action="/signup/" method="post">

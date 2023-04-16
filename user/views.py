@@ -17,7 +17,7 @@ def signup(request):
         if user:
             return redirect('/')
         else:
-            return render(request, 'user/signup.html')
+            return render(request, 'user/signup.html',{"form":form})
     elif request.method == 'POST':
         form = UserUpErro(request.POST)
         if form.is_valid():
@@ -30,7 +30,7 @@ def signup(request):
             else:
                 exist_user = get_user_model().objects.filter(username=username)
                 if exist_user:
-                    return render(request, 'user/signup.html') # 사용자가 존재하기 때문에 사용자를 저장하지 않고 회원가입 페이지를 다시 띄움
+                    return render(request, 'user/signup.html',{"form":form}) # 사용자가 존재하기 때문에 사용자를 저장하지 않고 회원가입 페이지를 다시 띄움
                 else:
                     UserModel.objects.create_user(username=username, password=password,email=email)
                     # mypage추가

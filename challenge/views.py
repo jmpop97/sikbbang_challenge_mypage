@@ -87,7 +87,7 @@ def delete_challenge(request, id):
     if request.user == target_challenge.challenge_author:
         target_challenge.delete()
     else:
-        return HttpResponse("권한이 없습니다.")
+        return messages("권한이 없습니다.")
     return redirect('/main')
 
 
