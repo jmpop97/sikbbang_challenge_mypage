@@ -1,13 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import ChallengeModel
+from comments.models import CommentModel
 from django.contrib.auth.decorators import login_required
-
-
-def delete_challenge(request, id):
-    target_challenge = ChallengeModel.objects.get(id=id)
-    target_challenge.delete()
-    return redirect('/main')
+from django.shortcuts import get_object_or_404
 
 
 def view_main(request):
@@ -47,11 +43,25 @@ def posting_challenge(request):
 @login_required
 def challenge_detail(request, id):
     target_challenge = ChallengeModel.objects.get(id=id)
+    all_comment = CommentModel.objects.all().order_by("-comment_created_at")
+
     if request.method == 'GET':
         context = {
-            'challenge': target_challenge
+            'challenge': target_challenge,
+            'all_comment': all_comment,
         }
         return render(request, 'challenge/detail.html', context)
+    if request.method == 'POST':
+        user = request.user
+        my_comment = CommentModel()
+        my_comment.comment_writer = user
+        my_comment.comment_content = request.POST.get(
+            'comment_content', '')  # 사용자가 입력한 댓글내용
+        my_comment.comment_image = request.FILES.get(
+            'comment_image')  # 사용자가 업로드한 이미지파일
+        my_comment.save()  # 입력한 값들을 DB에 저장하는 중요한 명령어
+        # 저장하고 나면 댓글 보는 화면으로 보낸다.
+        return redirect('/challenge/' + str(target_challenge.id) + '/')
 
 
 # =========챌린지 검색 view ============
@@ -62,6 +72,7 @@ def challenge_search_view(request):
     return render(request, 'challenge/challenge_search.html', context)
 
 
+# =======챌린지 삭제=============
 @login_required
 def delete_challenge(request, id):
     target_challenge = ChallengeModel.objects.get(id=id)
@@ -69,6 +80,7 @@ def delete_challenge(request, id):
     return redirect('/main')
 
 
+# =======챌린지 edit=========
 @login_required
 def edit_challenge(request, id):
     target_challenge = ChallengeModel.objects.get(id=id)
@@ -89,3 +101,28 @@ def edit_challenge(request, id):
             target_challenge.save()
             challenge_id = target_challenge.id
             return redirect('/challenge/' + str(challenge_id))
+
+
+@login_required
+def comment_update(request, id):
+    post_del = get_object_or_404(CommentModel, id=id)
+    post = post_del.comment_writer.id
+
+    if request.method == "GET":
+        context = {"post_del": post_del}
+        return render(request, "challenge/comment_update.html", context)
+    if request.method == "POST":
+        post_del.comment_content = request.POST["inputValue"]
+        post_del.comment_image = request.FILES.get('input_image')
+        post_del.save()
+    return redirect('/challenge/' + str(post))
+
+
+@login_required
+def comment_delete(request, id):
+    if request.method == "POST":
+        post = get_object_or_404(CommentModel, id=id)
+        post_del = post.comment_writer.id
+        post.delete()
+
+    return redirect('/challenge/' + str(post_del))

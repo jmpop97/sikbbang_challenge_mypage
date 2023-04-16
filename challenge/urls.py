@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf.urls.static import static  # urlpatterns += 전용
+from django.conf import settings  # urlpatterns += 전용
 from . import views
 
 app_name = 'challenge_app'
@@ -14,4 +16,11 @@ urlpatterns = [
     path('search_results/', views.challenge_search_view, name='search-results'),
     path('challenge/<int:id>/edit/',
          views.edit_challenge, name='edit_challenge'),
+    path('api/comments/edit/<int:id>',
+         views.comment_update, name="comment_update"),
+    path('api/comments/delete/<int:id>',
+         views.comment_delete, name="comment_delete"),
 ]
+
+urlpatterns += static(settings.MEDIA_URL,
+                      document_root=settings.MEDIA_ROOT)  # 장고한테 이미지 루트를 알려줌

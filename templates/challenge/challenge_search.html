@@ -6,10 +6,11 @@
 {% if results %}
 <ul>
   {% for result in results %}
-  <li>{{ result.challenge_title }}</li>
+  <li><a href="{% url 'challenge_app:challenge_detail' id=result.id %}">{{ result.challenge_title }}</a></li>
   <li>작성자 : {{ result.challenge_author }}</li>
   <li>챌린지명 : {{ result.challenge_name }}</li>
-  <img src="{{ MEDIA_URL }}{{ result.challenge_image.url }}" alt="{{ result.challenge_title }}">
+  <a href="{% url 'challenge_app:challenge_detail' id=result.id %}">
+    <img src="{{ MEDIA_URL }}{{ result.challenge_image.url }}" alt="{{ result.challenge_title }}"></a>
   {% endfor %}
 </ul>
 {% else %}

@@ -1,12 +1,5 @@
 /*모든 내용물을 감싸는 div*/
-.wrap_all {
-    width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 400px;
-}
+
 
 /*타이틀: 수정하기!*/
 .title {
@@ -22,6 +15,7 @@
     display: flex;
     flex-direction: row;
 }
+
 /*작성자명*/
 .writer {
     margin-right: 450px;
@@ -38,12 +32,14 @@
     display: flex;
     flex-direction: column;
 }
+
 /*안내문구 "댓글내용:"*/
 .commentspan {
     font-weight: bold;
     margin-right: 20px;
     display: flex;
 }
+
 /*댓글 입력하는 textarea*/
 .commenttextarea {
     width: 730px;
@@ -63,12 +59,14 @@
     align-items: flex-start;
     justify-content: center;
 }
+
 /*이미지 안내 문구*/
 .imglabel {
     font-weight: bold;
     margin-right: 10px;
     padding: 13px;
 }
+
 /*이미지 인풋 박스*/
 .imginput {
     border: 1px solid black;
