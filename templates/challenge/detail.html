@@ -11,7 +11,7 @@
 <p>챌린지 이름 : {{ challenge.challenge_name }}</p>
 <p>도전 장르 : {{ challenge.challenge_genre }}</p>
 <p>내용 : {{ challenge.challenge_content }}</p>
-{% if comment.comment_image %}
+{% if challenge.challenge_image %}
 <img src="{{ MEDIA_URL }}{{ challenge.challenge_image.url }}"><br>
 {% else %}
 <img src="{% static 'admin/img/defaultimg.png' %}" alt="default Image">
