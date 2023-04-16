@@ -53,7 +53,7 @@ def challeng_list(request):
 def comment_list(request):
     comment_info = []
     comment_key = MyPageModel.objects.get(id=request.user.id)
-    comment_info = comment_key.challenge_key.all()
+    comment_info = comment_key.comment_key.all()
     return comment_info
 
 def page_list(list,list_num : int, page : int):
