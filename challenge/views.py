@@ -76,7 +76,8 @@ def challenge_detail(request, id):
 # =========챌린지 검색 view ============
 def challenge_search_view(request):
     query = request.GET.get('q')  # GET에서 파라미터 가져와서 query변수에 할당
-    results = ChallengeModel.objects.filter(challenge_title__icontains=query)
+    results = ChallengeModel.objects.filter(
+        challenge_title__icontains=query).order_by('-challenge_created_at')
     context = {'query': query, 'results': results}
     return render(request, 'challenge/challenge_search.html', context)
 
@@ -118,8 +119,8 @@ def edit_challenge(request, id):
                 target_challenge.save()
                 challenge_id = target_challenge.id
                 return redirect('/challenge/' + str(challenge_id) + '/')
-    else:
-        return HttpResponse("권한이 없습니다.")
+            else:
+                return HttpResponse("권한이 없습니다.")
 
 
 @login_required

@@ -4,21 +4,30 @@
 {% block content %}
 
 
-<form method="post">
-  {% csrf_token %}
-  <div class="mb-4">
-    <h2>{{post.client}}님의 문의글</h2>
-    <div class="mb-5">
-      <div class="mb-2">작성자: {{ post.client }} | 작성일: {{ post.qna_created_at|date:'Y. m. d' }}</div>
-      <div class="detail3">제목:{{ post.qna_title }}</div>
+<div class="wrap_all">
+  <br>
+  <h3>{{post.client}}님의 문의글</h3>
+
+  <div class="one_comment">
+    <p class="writer_date">
+      <span>작성자: {{ post.client }} | 작성일: {{ post.qna_created_at|date:'Y. m. d' }}</span>
+    </p>
+    <p class="qna_comment">
+      <span>제목:{{ post.qna_title }}</span><br>
       <span>문의 내용:</span>
-      <div class="detail4">{{ post.qna_content }}</div><br><br>
-      <a class="go_to_edit_btn" type="button" href="{% url 'qna-edit' pk=post.pk %}">Edit</a>
+    </p>
+    <div class="qna_comment_content">{{ post.qna_content }}</div>
+    {% if post.client == user %}
+    <div class="edit_delete">
+      <a class="edit_button" type="button" href="{% url 'qna-edit' pk=post.pk %}">수정하기</a>
+      <form method="post" action="{% url 'qna-delete' pk=post.pk %}">
+        {% csrf_token %}
+        <button class="delete_button" type="submit">삭제하기</button>
+      </form>
     </div>
+    {% endif %}
   </div>
-</form>
-
-
+</div>
 
 
 {% endblock %}
