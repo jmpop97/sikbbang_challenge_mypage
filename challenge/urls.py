@@ -20,6 +20,9 @@ urlpatterns = [
          views.comment_update, name="comment_update"),
     path('api/comments/delete/<int:id>',
          views.comment_delete, name="comment_delete"),
+    path('challenge/<int:id>/join/', views.join_challenge, name='join_challenge'),
+    path('challenge/<int:id>/complete/',
+         views.complete_challenge, name='complete_challenge'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
