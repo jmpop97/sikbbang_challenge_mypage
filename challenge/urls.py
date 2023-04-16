@@ -24,6 +24,3 @@ urlpatterns = [
     path('challenge/<int:id>/complete/',
          views.complete_challenge, name='complete_challenge'),
 ]
-
-urlpatterns += static(settings.MEDIA_URL,
-                      document_root=settings.MEDIA_ROOT)  # 장고한테 이미지 루트를 알려줌

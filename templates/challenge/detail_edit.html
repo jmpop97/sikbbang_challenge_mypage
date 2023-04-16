@@ -1,13 +1,17 @@
 {% extends 'base.html' %} {% block content %}
 
-<form action="#" method="POST" enctype="multipart/form-data">
+<form action="{% url 'challenge_app:edit_challenge' challenge.id %}" method="POST" enctype="multipart/form-data"
+    class="form-group">
     {% csrf_token %}
     <label for="challenge_title">제목</label>
-    <input class="form-control" type="text" name="challenge_title" value="{{ challenge.challenge_title }}" /><br />
+    <input class="form-control" type="text" required name="challenge_title"
+        value="{{ challenge.challenge_title }}" /><br />
     <label for="challenge_name">챌린지 이름</label>
-    <input class="form-control" type="text" name="challenge_name" value="{{ challenge.challenge_name }}" /><br />
+    <input class="form-control" type="text" required name="challenge_name"
+        value="{{ challenge.challenge_name }}" /><br />
     <label for="challenge_genre">도전 장르</label>
-    <input class="form-control" type="text" name="challenge_genre" value="{{ challenge.challenge_genre }}" /><br />
+    <input class="form-control" type="text" required name="challenge_genre"
+        value="{{ challenge.challenge_genre }}" /><br />
     <label for="challenge_content">내용</label>
     <textarea class="form-control" name="challenge_content" cols="30"
         rows="5">{{ challenge.challenge_content }}</textarea><br />
