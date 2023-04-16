@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 1200px;
+    width: 1000px;
 }
 
 /*타이틀: 인증 후기를 남겨볼까요?*/
@@ -51,18 +51,20 @@
     flex-direction: row;
     padding: 20px;
 }
+
 /*이미지 담는 투명 컨테이너와 이미지*/
 .img_container {
-  width: 300px;
-  height: 300px;
-  margin-right: 40px;
-  border-radius: 20px;
+    width: 300px;
+    height: 300px;
+    margin-right: 40px;
+    border-radius: 20px;
 }
+
 .img_container img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 20px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
 }
 
 /*댓글내용 span*/
@@ -77,18 +79,28 @@
     display: flex;
     justify-content: end;
 }
+
 /*수정버튼*/
 .edit_button {
     margin-right: 20px;
     font-size: 15px;
     font-weight: bold;
     padding: 7px;
+    color: rgb(247, 181, 102);
+    background-color: rgb(48, 102, 48);
+    border-color: rgb(48, 102, 48);
+    border-radius: 5px;
+
 }
+
 /*삭제버튼*/
 .delete_button {
     margin-right: 15px;
     font-size: 15px;
     font-weight: bold;
-    color: red;
     padding: 5px;
+    color: rgb(247, 181, 102);
+    background-color: rgb(48, 102, 48);
+    border-color: rgb(48, 102, 48);
+    border-radius: 5px;
 }
