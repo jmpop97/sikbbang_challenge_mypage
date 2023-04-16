@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from .models import ChallengeModel, ChallengeJoinModel
 
 
-
 def view_main(request):
     challenges = ChallengeModel.objects.all()
     context = {
@@ -62,6 +61,7 @@ def challenge_detail(request, id):
     if request.method == 'POST':
         user = request.user
         my_comment = CommentModel()
+        my_comment.comment_challenge = target_challenge
         my_comment.comment_writer = user
         my_comment.comment_content = request.POST.get(
             'comment_content', '')  # 사용자가 입력한 댓글내용
@@ -102,7 +102,7 @@ def edit_challenge(request, id):
             }
             return render(request, 'challenge/detail_edit.html', context)
 
-        elif request.method == 'POST':
+        if request.method == 'POST':
             target_challenge.challenge_title = request.POST.get(
                 'challenge_title')
             target_challenge.challenge_name = request.POST.get(
@@ -112,7 +112,7 @@ def edit_challenge(request, id):
             target_challenge.challenge_content = request.POST.get(
                 'challenge_content')
             target_challenge.challenge_image = request.FILES.get(
-                'challenge_image')
+                'challenge_image') or target_challenge.challenge_image
             if target_challenge.challenge_title and target_challenge.challenge_name and target_challenge.challenge_genre and target_challenge.challenge_content:
                 target_challenge.save()
                 challenge_id = target_challenge.id
@@ -145,7 +145,7 @@ def comment_delete(request, id):
 
     return redirect('/challenge/' + str(post_del))
 
-    
+
 def join_challenge(request, id):
     target_challenge = get_object_or_404(ChallengeModel, id=id)
     target_user = request.user
@@ -178,4 +178,3 @@ def complete_challenge(request, id):
         return HttpResponse("챌린지 완료")
     else:
         return HttpResponse("이미 완료한 챌린지입니다.")
-
