@@ -129,7 +129,7 @@ def edit_challenge(request, id):
 @login_required(login_url='/signin/')
 def comment_update(request, id):
     post_del = get_object_or_404(CommentModel, id=id)
-    post = post_del.comment_writer.id
+    post = post_del.comment_challenge.id
 
     if request.method == "GET":
         context = {"post_del": post_del}
