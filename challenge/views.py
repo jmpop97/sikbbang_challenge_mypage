@@ -145,7 +145,7 @@ def comment_update(request, id):
 def comment_delete(request, id):
     if request.method == "POST":
         post = get_object_or_404(CommentModel, id=id)
-        post_del = post.comment_writer.id
+        post_del = post.comment_challenge.id
         post.delete()
 
     return redirect('/challenge/' + str(post_del) + '/')
